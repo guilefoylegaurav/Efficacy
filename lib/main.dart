@@ -1,3 +1,5 @@
+import 'package:dsc_club_management_app/screens/eventPage.dart';
+
 import './screens/profile.dart';
 import './screens/wrapper.dart';
 import 'package:flutter/material.dart';
@@ -17,12 +19,16 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primaryColor: Colors.white,
+        primaryTextTheme: TextTheme(
+          headline6: TextStyle(color: Colors.blue[400]),
+        ),
       ),
       routes: {
         "/": (context) => Wrapper(),
         "/register": (context) => Register(),
         "/clubs": (context) => Clubs(),
         "/profile": (context) => Profile(),
+        "/event": (context) => EventPage(),
       },
     );
   }
