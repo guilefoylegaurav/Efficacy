@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 import './screens/clubs.dart';
 import './screens/register_screen.dart';
+import './screens/illuminits.dart';
 
 void main() {
   runApp(MyApp());
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
         "/clubs": (context) => Clubs(),
         "/profile": (context) => Profile(),
         "/event": (context) => EventPage(),
+        "/illuminits":(context) => Illuminits(),
       },
     );
   }

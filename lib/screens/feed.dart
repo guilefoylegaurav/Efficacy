@@ -12,8 +12,34 @@ class Feed extends StatelessWidget {
           centerTitle: true,
         ),
         drawer: Drawer(
-          child: Center(
-            child: Text("Under Construction"),
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              DrawerHeader(
+                child: Text('Menu'),
+                decoration: BoxDecoration(
+                  color: Colors.teal,
+                ),
+              ),
+              ListTile(
+                title: Text('Home'),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                title: Text('Illuminits'),
+                onTap: () {
+                  Navigator.of(context).pushNamed("/illuminits");
+                },
+              ),
+              ListTile(
+                title: Text('Machine Learning Club'),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
           ),
         ),
         body: SingleChildScrollView(
