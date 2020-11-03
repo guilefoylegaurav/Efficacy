@@ -19,9 +19,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
+        textTheme: TextTheme(
+          bodyText1: TextStyle(fontFamily: "CenturyGothic"),
+          bodyText2: TextStyle(fontFamily: "CenturyGothic"),
+        ),
         primaryColor: Colors.white,
         primaryTextTheme: TextTheme(
-          headline6: TextStyle(color: Colors.blue[400]),
+          headline6:
+              TextStyle(color: Colors.blue[400], fontFamily: "CenturyGothic"),
         ),
       ),
       routes: {
@@ -30,7 +35,7 @@ class MyApp extends StatelessWidget {
         "/clubs": (context) => Clubs(),
         "/profile": (context) => Profile(),
         "/event": (context) => EventPage(),
-        "/illuminits":(context) => Illuminits(),
+        "/illuminits": (context) => Illuminits(),
       },
     );
   }
