@@ -1,5 +1,7 @@
+import 'package:dsc_club_management_app/models/event.dart';
 import 'package:dsc_club_management_app/services/data.dart';
 import 'package:dsc_club_management_app/widgets/banner.dart';
+import 'package:dsc_club_management_app/widgets/eventTile.dart';
 import 'package:flutter/material.dart';
 
 class Feed extends StatelessWidget {
@@ -7,7 +9,10 @@ class Feed extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Feed"),
+          title: Text(
+            "Feed",
+            style: TextStyle(fontWeight: FontWeight.w200),
+          ),
           elevation: 0,
           centerTitle: true,
         ),
@@ -30,7 +35,7 @@ class Feed extends StatelessWidget {
               ListTile(
                 title: Text('Illuminits'),
                 onTap: () {
-                  Navigator.of(context).pushNamed("/illuminits");
+                  Navigator.of(context).pushNamed("/oneClub");
                 },
               ),
               ListTile(
@@ -49,40 +54,8 @@ class Feed extends StatelessWidget {
               Container(
                 child: Column(
                   children: EventList.map((e) {
-                    return InkWell(
-                      onTap: () {
-                        Navigator.of(context).pushNamed("/event");
-                      },
-                      child: ListTile(
-                        leading: CircleAvatar(
-                          child: Container(
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                image: DecorationImage(
-                                    image: AssetImage("assets/code.png"))),
-                          ),
-                        ),
-                        title: Text(e.name),
-                        subtitle: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("Organised by ${e.club}"),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text("${e.date} | ${e.time}"),
-                                Text(
-                                  "ENDED",
-                                  style: TextStyle(color: Colors.red),
-                                )
-                              ],
-                            ),
-                            SizedBox(
-                              height: 5,
-                            )
-                          ],
-                        ),
-                      ),
+                    return EventTile(
+                      e: e,
                     );
                   }).toList(),
                 ),
