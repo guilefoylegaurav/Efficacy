@@ -32,18 +32,18 @@ class Feed extends StatelessWidget {
                   Navigator.pop(context);
                 },
               ),
-              ListTile(
-                title: Text('Illuminits'),
-                onTap: () {
-                  Navigator.of(context).pushNamed("/oneClub");
-                },
-              ),
-              ListTile(
-                title: Text('Machine Learning Club'),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
+              Container(
+                  child: Column(
+                children: clubList.map((e) {
+                  return ListTile(
+                      title: Text(e.name),
+                      onTap: () {
+                        Navigator.of(context).pushNamed("/oneClub", arguments: {
+                          "id": e.id,
+                        });
+                      });
+                }).toList(),
+              ))
             ],
           ),
         ),
@@ -53,7 +53,7 @@ class Feed extends StatelessWidget {
               BannerS(),
               Container(
                 child: Column(
-                  children: EventList.map((e) {
+                  children: eventList.map((e) {
                     return EventTile(
                       e: e,
                     );
