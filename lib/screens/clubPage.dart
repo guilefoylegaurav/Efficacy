@@ -9,39 +9,67 @@ class ClubPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(hexColor(BG)),
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            floating: false,
-            pinned: true,
-            flexibleSpace: FlexibleSpaceBar(
-              centerTitle: true,
-              title: Text(
-                "Illuminits",
-                style: TextStyle(fontWeight: FontWeight.bold),
+      body: NestedScrollView(
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            return <Widget>[
+              SliverAppBar(
+                expandedHeight: 200.0,
+                floating: false,
+                pinned: true,
+                flexibleSpace: FlexibleSpaceBar(
+                  centerTitle: true,
+                  title: Text("Illuminits",
+                      style: TextStyle(
+                        color: Colors.black87,
+                        fontSize: 16.0,
+                      )),
+                  background: Container(
+                    color: Color(hexColor(BG)),
+                  ),
+                ),
               ),
-              background: Container(
-                color: Color(hexColor(BG)),
-              ),
-            ),
-            expandedHeight: 200,
-          ),
-          SliverList(
-              delegate: SliverChildListDelegate([
-            Container(
-              padding: EdgeInsets.fromLTRB(10, 40, 10, 5),
-              child: Column(
-                children: EventList.map((e) => EventTile(e: e)).toList(),
-              ),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(30),
-                      topRight: Radius.circular(30)),
-                  color: Colors.white),
-              height: 600,
-            )
-          ]))
-        ],
+            ];
+          },
+          body: Column(
+            children: [
+              Container(
+                padding: EdgeInsets.fromLTRB(10, 40, 10, 5),
+                child: Column(
+                  children: [
+                    DefaultTabController(
+                      length: 2,
+                      child:  TabBar(
+                        tabs: [
+                          Tab(child:(
+                              Text(
+                                "Club Details",
+                                style: TextStyle(fontFamily: font, fontWeight: FontWeight.bold,color: Colors.teal),
+                              )
+                          )),
+                          Tab(child:(
+                              Text(
+                                "Events",
+                                style: TextStyle(fontFamily: font, fontWeight: FontWeight.bold, color: Colors.teal),
+                              )
+                          )),
+                        ],
+                      ),
+                    ),
+                    Column(
+                      children: EventList.map((e) => EventTile(e: e)).toList(),
+                    ),
+                  ],
+                ),
+
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(30),
+                        topRight: Radius.circular(30)),
+                    color: Colors.white),
+                height: 600,
+              )
+            ],
+          )
       ),
     );
   }
