@@ -30,7 +30,7 @@ var clubList = [
       name: "Illuminits",
       desc:
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non tortor volutpat, molestie tellus vel, luctus elit. Sed hendrerit orci ante, ut venenatis sem cursus non. Etiam ullamcorper condimentum mattis. Etiam commodo dolor ut enim cursus, quis dapibus mi ultrices. Cras sollicitudin sit amet elit id aliquet. Suspendisse scelerisque ultricies vehicula. Curabitur posuere pellentesque maximus. Nulla facilisi.",
-      imageUrl: "assets/illuminits.png"),
+      imageUrl: "assets/illuminits.jpg"),
   Club(
       id: "i2",
       name: "Machine Learning Club",
