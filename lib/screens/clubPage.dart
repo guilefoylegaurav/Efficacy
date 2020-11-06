@@ -7,12 +7,12 @@ import 'package:dsc_club_management_app/widgets/eventTile.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-class MainCollapsingToolbar extends StatefulWidget {
+class ClubPage extends StatefulWidget {
   @override
-  _MainCollapsingToolbarState createState() => _MainCollapsingToolbarState();
+  _ClubPageState createState() => _ClubPageState();
 }
 
-class _MainCollapsingToolbarState extends State<MainCollapsingToolbar> {
+class _ClubPageState extends State<ClubPage> {
   @override
   Widget build(BuildContext context) {
     final routeArgs =
