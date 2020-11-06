@@ -1,7 +1,11 @@
+import 'package:dsc_club_management_app/config.dart';
+import 'package:dsc_club_management_app/models/club.dart';
 import 'package:dsc_club_management_app/models/event.dart';
 import 'package:dsc_club_management_app/services/data.dart';
+import 'package:dsc_club_management_app/utilities/utilities.dart';
 import 'package:dsc_club_management_app/widgets/banner.dart';
 import 'package:dsc_club_management_app/widgets/eventTile.dart';
+import 'package:dsc_club_management_app/widgets/sidebar.dart';
 import 'package:flutter/material.dart';
 
 class Feed extends StatelessWidget {
@@ -11,40 +15,14 @@ class Feed extends StatelessWidget {
         appBar: AppBar(
           title: Text(
             "Feed",
-            style: TextStyle(fontWeight: FontWeight.w200),
+            style: TextStyle(fontWeight: FontWeight.bold),
           ),
           elevation: 0,
           centerTitle: true,
         ),
         drawer: Drawer(
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: <Widget>[
-              DrawerHeader(
-                child: Text('Menu'),
-                decoration: BoxDecoration(
-                  color: Colors.teal,
-                ),
-              ),
-              ListTile(
-                title: Text('Home'),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-              Container(
-                  child: Column(
-                children: clubList.map((e) {
-                  return ListTile(
-                      title: Text(e.name),
-                      onTap: () {
-                        Navigator.of(context).pushNamed("/oneClub", arguments: {
-                          "id": e.id,
-                        });
-                      });
-                }).toList(),
-              ))
-            ],
+          child: SideBar(
+            clubList: clubList,
           ),
         ),
         body: SingleChildScrollView(
