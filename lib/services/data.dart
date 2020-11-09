@@ -22,6 +22,9 @@ var eventList = [
       date: "27 Sep",
       time: "11 : 00"),
   Event(name: "Yoga Class", club: "Yoga Club", date: "27 Sep", time: "11 : 00"),
+  Event(name: "Football", club: "Football Club", date: "29 Sep", time: "11 : 00"),
+  Event(name: "CSGO Class", club: "Gaming Club", date: "27 Sep", time: "11 : 00"),
+  Event(name: "Valorant Class", club: "Gaming Club", date: "29 Sep", time: "12 : 00"),
 ];
 
 var clubList = [
