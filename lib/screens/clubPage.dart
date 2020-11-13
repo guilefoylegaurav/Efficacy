@@ -32,25 +32,32 @@ class _ClubPageState extends State<ClubPage> {
                   expandedHeight: 200.0,
                   floating: false,
                   pinned: true,
+                  backgroundColor: Color(hexColor(BG)),
                   flexibleSpace: FlexibleSpaceBar(
                       centerTitle: true,
                       title: Text(club.name,
                           style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.bold)),
-                      background: Image.asset(
-                        club.imageUrl,
-                        fit: BoxFit.cover,
-                      )),
+                              color: Colors.white,
+                              fontSize: 26.0,
+                              fontWeight: FontWeight.normal)),
+                  ),
                 ),
                 SliverPersistentHeader(
                   delegate: _SliverAppBarDelegate(
                     TabBar(
-                      labelColor: Colors.black87,
+                      indicator: BoxDecoration(
+                        borderRadius: BorderRadius.only(topLeft: Radius.circular(25),topRight: Radius.circular(25)),
+                        color: Colors.white
+                      ),
+                      labelPadding: EdgeInsets.symmetric(horizontal: 2.0, vertical: 1.0),
+                      labelColor: Colors.black,
                       unselectedLabelColor: Colors.grey,
                       tabs: [
-                        Tab(text: "Events"),
+                        Tab(child: Text("Events",
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.normal)),),
                         Tab(text: "Description"),
                       ],
                     ),
@@ -59,18 +66,23 @@ class _ClubPageState extends State<ClubPage> {
                 ),
               ];
             },
-            body: TabBarView(children: [
-              SingleChildScrollView(
-                child: Column(
-                  children: event
-                      .map((e) => EventTile(
-                            e: e,
-                          ))
-                      .toList(),
-                ),
+            body: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(50),
               ),
-              DescriptionSection(club: club),
-            ])),
+              child: TabBarView(children: [
+                SingleChildScrollView(
+                  child: Column(
+                    children: event
+                        .map((e) => EventTile(
+                              e: e,
+                            ))
+                        .toList(),
+                  ),
+                ),
+                DescriptionSection(club: club),
+              ]),
+            )),
       ),
     );
   }
@@ -90,6 +102,7 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
     return Container(
+      color: Color(hexColor(BG)),
       child: _tabBar,
     );
   }
