@@ -1,5 +1,5 @@
-import 'package:dsc_club_management_app/screens/clubs.dart';
-import 'package:dsc_club_management_app/screens/feed.dart';
+import 'package:Efficacy/screens/clubs.dart';
+import 'package:Efficacy/screens/feed.dart';
 import 'package:flutter/material.dart';
 
 import './login_screen.dart';

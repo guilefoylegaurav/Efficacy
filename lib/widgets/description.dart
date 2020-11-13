@@ -1,5 +1,5 @@
-import 'package:dsc_club_management_app/models/club.dart';
-import 'package:dsc_club_management_app/utilities/utilities.dart';
+import 'package:Efficacy/models/club.dart';
+import 'package:Efficacy/utilities/utilities.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 

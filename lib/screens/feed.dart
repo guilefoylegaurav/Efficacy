@@ -1,11 +1,11 @@
-import 'package:dsc_club_management_app/config.dart';
-import 'package:dsc_club_management_app/models/club.dart';
-import 'package:dsc_club_management_app/models/event.dart';
-import 'package:dsc_club_management_app/services/data.dart';
-import 'package:dsc_club_management_app/utilities/utilities.dart';
-import 'package:dsc_club_management_app/widgets/banner.dart';
-import 'package:dsc_club_management_app/widgets/eventTile.dart';
-import 'package:dsc_club_management_app/widgets/sidebar.dart';
+import 'package:Efficacy/config.dart';
+import 'package:Efficacy/models/club.dart';
+import 'package:Efficacy/models/event.dart';
+import 'package:Efficacy/services/data.dart';
+import 'package:Efficacy/utilities/utilities.dart';
+import 'package:Efficacy/widgets/banner.dart';
+import 'package:Efficacy/widgets/eventTile.dart';
+import 'package:Efficacy/widgets/sidebar.dart';
 import 'package:flutter/material.dart';
 
 class Feed extends StatelessWidget {

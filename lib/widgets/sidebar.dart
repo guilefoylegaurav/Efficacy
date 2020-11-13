@@ -1,6 +1,6 @@
-import 'package:dsc_club_management_app/config.dart';
-import 'package:dsc_club_management_app/models/club.dart';
-import 'package:dsc_club_management_app/utilities/utilities.dart';
+import 'package:Efficacy/config.dart';
+import 'package:Efficacy/models/club.dart';
+import 'package:Efficacy/utilities/utilities.dart';
 import 'package:flutter/material.dart';
 
 class SideBar extends StatelessWidget {

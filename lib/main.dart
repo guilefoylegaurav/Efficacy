@@ -1,5 +1,5 @@
-import 'package:dsc_club_management_app/screens/clubPage.dart';
-import 'package:dsc_club_management_app/screens/eventPage.dart';
+import 'package:Efficacy/screens/clubPage.dart';
+import 'package:Efficacy/screens/eventPage.dart';
 
 import './screens/profile.dart';
 import './screens/wrapper.dart';

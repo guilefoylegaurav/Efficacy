@@ -1,5 +1,5 @@
-import 'package:dsc_club_management_app/config.dart';
-import 'package:dsc_club_management_app/models/event.dart';
+import 'package:Efficacy/config.dart';
+import 'package:Efficacy/models/event.dart';
 import 'package:flutter/material.dart';
 
 class EventTile extends StatelessWidget {

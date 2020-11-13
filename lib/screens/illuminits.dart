@@ -1,5 +1,5 @@
-import 'package:dsc_club_management_app/config.dart';
-import 'package:dsc_club_management_app/widgets/eventTile.dart';
+import 'package:Efficacy/config.dart';
+import 'package:Efficacy/widgets/eventTile.dart';
 import 'package:flutter/material.dart';
 import '../utilities/utilities.dart';
 import '../services/data.dart';

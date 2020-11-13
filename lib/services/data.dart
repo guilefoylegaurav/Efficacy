@@ -1,5 +1,5 @@
-import 'package:dsc_club_management_app/models/club.dart';
-import 'package:dsc_club_management_app/models/event.dart';
+import 'package:Efficacy/models/club.dart';
+import 'package:Efficacy/models/event.dart';
 
 var eventList = [
   Event(name: "Cloud Essentials", club: "DSC", date: "27 Sep", time: "19 : 00"),
