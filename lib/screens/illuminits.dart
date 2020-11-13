@@ -55,7 +55,7 @@ class Illuminits extends StatelessWidget {
                     ),
                   ),
                   Column(
-                    children: EventList.map((e) => EventTile(e: e)).toList(),
+                    children: eventList.map((e) => EventTile(e: e)).toList(),
                   ),
                 ],
               ),
