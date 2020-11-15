@@ -31,8 +31,6 @@ class _EventPageState extends State<EventPage> {
               children: [
                 Container(
                   child: InteractiveViewer(
-                    minScale: 0.5,
-                    maxScale: 3.0,
                     constrained: false,
                       child: Image.network("https://images6.alphacoders.com/107/thumb-1920-1072679.jpg"),
                     ),
@@ -46,12 +44,20 @@ class _EventPageState extends State<EventPage> {
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black45,
+                          offset: Offset(3.0,3.0),
+                          blurRadius: 15.0,
+                          spreadRadius: 1.2
+                        )
+                      ]
                     ),
                     height: MediaQuery.of(context).size.height*0.45,
                     width: MediaQuery.of(context).size.width*0.8,
                     child: Card(
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(14),
+                        borderRadius: BorderRadius.circular(20),
                       ),
                       child: Column(
                         children: [
@@ -59,8 +65,23 @@ class _EventPageState extends State<EventPage> {
                             splashColor: Color(hexColor(BG)),
                             child: Container(
                               child: Padding(
-                                padding: const EdgeInsets.all(20.0),
-                                child: Text(event.description, textAlign: TextAlign.justify,),
+                                padding: const EdgeInsets.all(30.0),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      event.name,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: Color(hexColor(BG)),
+                                        fontSize: 25.0
+                                      )
+                                    ),
+                                    Divider(
+                                      thickness: 2.5,
+                                    ),
+                                    Text(event.description, textAlign: TextAlign.justify,),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
@@ -71,7 +92,7 @@ class _EventPageState extends State<EventPage> {
                             child: RaisedButton(
                               onPressed: () {},
                               textColor: Colors.white,
-                              padding: const EdgeInsets.all(10.0),
+                              padding: EdgeInsets.all(10.0),
                               elevation: 20,
                               color: Color(hexColor(BG)),
                               child: Container(
