@@ -2,29 +2,32 @@ import 'package:Efficacy/models/club.dart';
 import 'package:Efficacy/models/event.dart';
 
 var eventList = [
-  Event(name: "Cloud Essentials", club: "DSC", date: "27 Sep", time: "19 : 00"),
+  Event(name: "Cloud Essentials", club: "DSC", date: "27 Sep", time: "19 : 00", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non tortor volutpat, molestie tellus vel, luctus elit. Sed hendrerit orci ante, ut venenatis sem cursus non. Etiam ullamcorper condimentum mattis. Etiam commodo dolor ut enim cursus, quis dapibus mi ultrices. Cras sollicitudin sit amet elit id aliquet. Suspendisse scelerisque ultricies vehicula. Curabitur posuere pellentesque maximus. Nulla facilisi."),
   Event(
       name: "Overfitting and Underfitting Class",
       club: "Machine Learning Club",
       date: "27 Sep",
-      time: "8 : 00"),
-  Event(name: "Parlare", club: "Illuminits", date: "27 Sep", time: "9 : 00"),
+      time: "8 : 00",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non tortor volutpat, molestie tellus vel, luctus elit. Sed hendrerit orci ante, ut venenatis sem cursus non. Etiam ullamcorper condimentum mattis. Etiam commodo dolor ut enim cursus, quis dapibus mi ultrices. Cras sollicitudin sit amet elit id aliquet. Suspendisse scelerisque ultricies vehicula. Curabitur posuere pellentesque maximus. Nulla facilisi."),
+  Event(name: "Parlare", club: "Illuminits", date: "27 Sep", time: "9 : 00", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non tortor volutpat, molestie tellus vel, luctus elit. Sed hendrerit orci ante, ut venenatis sem cursus non. Etiam ullamcorper condimentum mattis. Etiam commodo dolor ut enim cursus, quis dapibus mi ultrices. Cras sollicitudin sit amet elit id aliquet. Suspendisse scelerisque ultricies vehicula. Curabitur posuere pellentesque maximus. Nulla facilisi."),
   Event(
-      name: "DSA Class", club: "Coding Club", date: "27 Sep", time: "11 : 00"),
+      name: "DSA Class", club: "Coding Club", date: "27 Sep", time: "11 : 00", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non tortor volutpat, molestie tellus vel, luctus elit. Sed hendrerit orci ante, ut venenatis sem cursus non. Etiam ullamcorper condimentum mattis. Etiam commodo dolor ut enim cursus, quis dapibus mi ultrices. Cras sollicitudin sit amet elit id aliquet. Suspendisse scelerisque ultricies vehicula. Curabitur posuere pellentesque maximus. Nulla facilisi."),
   Event(
       name: "Intro to Robotics",
       club: "NERDS",
       date: "27 Sep",
-      time: "11 : 00"),
+      time: "11 : 00",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non tortor volutpat, molestie tellus vel, luctus elit. Sed hendrerit orci ante, ut venenatis sem cursus non. Etiam ullamcorper condimentum mattis. Etiam commodo dolor ut enim cursus, quis dapibus mi ultrices. Cras sollicitudin sit amet elit id aliquet. Suspendisse scelerisque ultricies vehicula. Curabitur posuere pellentesque maximus. Nulla facilisi."),
   Event(
       name: "Linux Fundamentals",
       club: "DSC NITS",
       date: "27 Sep",
-      time: "11 : 00"),
-  Event(name: "Yoga Class", club: "Yoga Club", date: "27 Sep", time: "11 : 00"),
-  Event(name: "Football", club: "Football Club", date: "29 Sep", time: "11 : 00"),
-  Event(name: "CSGO Class", club: "Gaming Club", date: "27 Sep", time: "11 : 00"),
-  Event(name: "Valorant Class", club: "Gaming Club", date: "29 Sep", time: "12 : 00"),
+      time: "11 : 00",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non tortor volutpat, molestie tellus vel, luctus elit. Sed hendrerit orci ante, ut venenatis sem cursus non. Etiam ullamcorper condimentum mattis. Etiam commodo dolor ut enim cursus, quis dapibus mi ultrices. Cras sollicitudin sit amet elit id aliquet. Suspendisse scelerisque ultricies vehicula. Curabitur posuere pellentesque maximus. Nulla facilisi."),
+  Event(name: "Yoga Class", club: "Yoga Club", date: "27 Sep", time: "11 : 00", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non tortor volutpat, molestie tellus vel, luctus elit. Sed hendrerit orci ante, ut venenatis sem cursus non. Etiam ullamcorper condimentum mattis. Etiam commodo dolor ut enim cursus, quis dapibus mi ultrices. Cras sollicitudin sit amet elit id aliquet. Suspendisse scelerisque ultricies vehicula. Curabitur posuere pellentesque maximus. Nulla facilisi."),
+  Event(name: "Football", club: "Football Club", date: "29 Sep", time: "11 : 00", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non tortor volutpat, molestie tellus vel, luctus elit. Sed hendrerit orci ante, ut venenatis sem cursus non. Etiam ullamcorper condimentum mattis. Etiam commodo dolor ut enim cursus, quis dapibus mi ultrices. Cras sollicitudin sit amet elit id aliquet. Suspendisse scelerisque ultricies vehicula. Curabitur posuere pellentesque maximus. Nulla facilisi."),
+  Event(name: "CSGO Class", club: "Gaming Club", date: "27 Sep", time: "11 : 00", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non tortor volutpat, molestie tellus vel, luctus elit. Sed hendrerit orci ante, ut venenatis sem cursus non. Etiam ullamcorper condimentum mattis. Etiam commodo dolor ut enim cursus, quis dapibus mi ultrices. Cras sollicitudin sit amet elit id aliquet. Suspendisse scelerisque ultricies vehicula. Curabitur posuere pellentesque maximus. Nulla facilisi."),
+  Event(name: "Valorant Class", club: "Gaming Club", date: "29 Sep", time: "12 : 00", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non tortor volutpat, molestie tellus vel, luctus elit. Sed hendrerit orci ante, ut venenatis sem cursus non. Etiam ullamcorper condimentum mattis. Etiam commodo dolor ut enim cursus, quis dapibus mi ultrices. Cras sollicitudin sit amet elit id aliquet. Suspendisse scelerisque ultricies vehicula. Curabitur posuere pellentesque maximus. Nulla facilisi."),
 ];
 
 var clubList = [

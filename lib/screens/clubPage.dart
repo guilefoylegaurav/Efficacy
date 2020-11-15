@@ -36,10 +36,12 @@ class _ClubPageState extends State<ClubPage> {
                       flexibleSpace: FlexibleSpaceBar(
                           centerTitle: true,
                           title: Text(club.name,
-                              style: TextStyle(
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 26.0,
-                                  fontWeight: FontWeight.normal)),
+                                  fontWeight: FontWeight.normal),
+                          ),
                       ),
                     ),
                     SliverPersistentHeader(
