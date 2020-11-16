@@ -2,6 +2,7 @@ import 'package:Efficacy/config.dart';
 import 'package:Efficacy/services/data.dart';
 import 'package:Efficacy/utilities/utilities.dart';
 import 'package:flutter/material.dart';
+import 'package:Efficacy/widgets/imagePopout.dart';
 
 
 class EventPage extends StatefulWidget {
@@ -32,7 +33,15 @@ class _EventPageState extends State<EventPage> {
                 Container(
                   child: InteractiveViewer(
                     constrained: false,
-                      child: Image.network("https://images6.alphacoders.com/107/thumb-1920-1072679.jpg"),
+                      child: GestureDetector(
+                        child: Image.network("https://images6.alphacoders.com/107/thumb-1920-1072679.jpg"),
+                        onTap: () async {
+                          await showDialog(
+                            context: context,
+                            builder: (_) => ImagePopOut(event: event)
+                          );
+                        },
+                      )
                     ),
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height*0.5,

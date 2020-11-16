@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:Efficacy/models/event.dart';
 
 class BannerS extends StatelessWidget {
+  Event event;
   @override
   Widget build(BuildContext context) {
     return InkWell(
