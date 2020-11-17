@@ -56,9 +56,9 @@ class _EventPageState extends State<EventPage> {
                       boxShadow: [
                         BoxShadow(
                           color: Colors.black45,
-                          offset: Offset(3.0,3.0),
-                          blurRadius: 15.0,
-                          spreadRadius: 1.2
+                          offset: Offset(3.0,1.0),
+                          blurRadius: 2.0,
+                          spreadRadius: 0.5,
                         )
                       ]
                     ),

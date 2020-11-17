@@ -1,13 +1,15 @@
+import 'package:Efficacy/services/data.dart';
 import 'package:flutter/material.dart';
 import 'package:Efficacy/models/event.dart';
+import 'dart:math';
 
 class BannerS extends StatelessWidget {
-  Event event;
+  Event event = eventList[Random().nextInt(eventList.length)];
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.of(context).pushNamed("/event");
+        Navigator.of(context).pushNamed("/event", arguments: {"id": event.id});
       },
       child: ClipRRect(
         borderRadius: BorderRadius.circular(25),
@@ -32,13 +34,13 @@ class BannerS extends StatelessWidget {
                         width: 20,
                       ),
                       Text(
-                        "GoLang Workshop ",
+                        event.name,
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
-                      Text("by "),
+                      Text(" by "),
                       Text(
-                        "DSC",
+                        event.club,
                         style: TextStyle(color: Colors.blue),
                       )
                     ],
@@ -59,7 +61,7 @@ class BannerS extends StatelessWidget {
                                 width: 8,
                               ),
                               Text(
-                                "27 Sep | 21 : 00",
+                                event.date + ' | ' + event.time,
                                 style: TextStyle(color: Colors.blue),
                               ),
                             ],
