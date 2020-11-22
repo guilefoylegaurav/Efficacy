@@ -36,7 +36,7 @@ class BannerS extends StatelessWidget {
                       Text(
                         event.name,
                         style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
+                            fontSize: 15, fontWeight: FontWeight.bold),
                       ),
                       Text(" by "),
                       Text(

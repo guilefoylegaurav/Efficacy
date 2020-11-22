@@ -9,7 +9,7 @@ class EventTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
         onTap: () {
-          Navigator.of(context).pushNamed("/event",arguments: {"id":e.id, "cl": e.club});
+          Navigator.of(context).pushNamed("/event",arguments: {"id":e.id});
         },
         child: Card(
           shape: RoundedRectangleBorder(
