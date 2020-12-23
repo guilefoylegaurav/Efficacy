@@ -1,17 +1,19 @@
 import 'package:Efficacy/screens/clubs.dart';
-import 'package:Efficacy/screens/feed.dart';
+import 'package:Efficacy/screens/feedScreen.dart';
+import 'package:Efficacy/services/database.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import './login_screen.dart';
 
 class Wrapper extends StatelessWidget {
-  dynamic user = 1;
   @override
   Widget build(BuildContext context) {
-    if (user == null) {
-      return Login();
-    } else {
-      return Feed();
-    }
+    return MultiProvider(
+      providers: [
+        StreamProvider.value(value: DatabaseService().eventsFromCloud)
+      ],
+      child: FeedScreen(),
+    );
   }
 }

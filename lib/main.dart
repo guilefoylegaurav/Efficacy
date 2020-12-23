@@ -1,5 +1,5 @@
 import 'package:Efficacy/screens/clubPage.dart';
-import 'package:Efficacy/screens/eventPage.dart';
+import 'package:Efficacy/screens/eventScreen.dart';
 
 import './screens/profile.dart';
 import './screens/wrapper.dart';
@@ -10,8 +10,11 @@ import './screens/register_screen.dart';
 import './screens/clubPage.dart';
 import './config.dart';
 import './utilities/utilities.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -26,11 +29,10 @@ class MyApp extends StatelessWidget {
           bodyText1: TextStyle(fontFamily: "CenturyGothic"),
           bodyText2: TextStyle(fontFamily: "CenturyGothic"),
         ),
-        backgroundColor: Color(hexColor(BG)),
-        primaryColor: Color(hexColor(BG)),
+        backgroundColor: Colors.white,
+        primaryColor: Colors.white,
         primaryTextTheme: TextTheme(
-          headline6:
-              TextStyle(color: Colors.white, fontFamily: "CenturyGothic"),
+          headline6: TextStyle(fontFamily: font, fontWeight: FontWeight.bold),
         ),
       ),
       routes: {
@@ -38,7 +40,7 @@ class MyApp extends StatelessWidget {
         "/register": (context) => Register(),
         "/clubs": (context) => Clubs(),
         "/profile": (context) => Profile(),
-        "/event": (context) => EventPage(),
+        "/event": (context) => EventScreen(),
         "/oneClub": (context) => ClubPage(),
       },
     );
