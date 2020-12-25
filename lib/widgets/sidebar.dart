@@ -48,6 +48,7 @@ class SideBar extends StatelessWidget {
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 onTap: () {
+                  print(e.id);
                   Navigator.of(context).pushNamed("/oneClub", arguments: {
                     "id": e.id,
                   });
