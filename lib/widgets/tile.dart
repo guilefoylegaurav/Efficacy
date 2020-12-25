@@ -19,9 +19,8 @@ class EventTile extends StatelessWidget {
         Navigator.of(context).pushNamed("/event", arguments: {"id": event.id});
       },
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(0),
         child: Card(
-          elevation: 8,
+          elevation: 0,
           child: Container(
             width: double.infinity,
             child: Column(
@@ -56,7 +55,7 @@ class EventTile extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                  padding: const EdgeInsets.fromLTRB(10, 14, 0, 14),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -64,15 +63,16 @@ class EventTile extends StatelessWidget {
                         event.clubName,
                         style: TextStyle(fontSize: 15, color: Colors.grey),
                       ),
-                      Container(
-                          child: Wrap(
-                        children: [
-                          IconButton(
-                              icon: Icon(Icons.share), onPressed: () => {}),
-                          IconButton(
-                              icon: Icon(Icons.favorite), onPressed: () => {})
-                        ],
-                      )),
+                      // Container(
+                      //     child: Wrap(
+                      //   children: [
+                      //     IconButton(
+                      //         icon: Icon(Icons.share), onPressed: () => {}),
+                      //     IconButton(
+                      //         icon: Icon(Icons.favorite_border),
+                      //         onPressed: () => {})
+                      //   ],
+                      // )),
                     ],
                   ),
                 ),
