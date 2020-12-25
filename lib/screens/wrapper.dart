@@ -11,7 +11,8 @@ class Wrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        StreamProvider.value(value: DatabaseService().eventsFromCloud)
+        StreamProvider.value(value: DatabaseService().eventsFromCloud),
+        StreamProvider.value(value: DatabaseService().clubsFromCloud),
       ],
       child: FeedScreen(),
     );
