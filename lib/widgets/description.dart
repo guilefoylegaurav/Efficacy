@@ -55,39 +55,39 @@ class DescriptionSection extends StatelessWidget {
           SizedBox(
             height: 20,
           ),
-          Container(
-            height: 250,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: availableClubs.map((e) {
-                return Container(
-                  width: 200,
-                  child: InkWell(
-                    onTap: () => {
-                      Navigator.of(context).pushReplacementNamed("/oneClub",
-                          arguments: {"id": e.id})
-                    },
-                    child: Card(
-                      elevation: 5.0,
-                      margin: EdgeInsets.fromLTRB(10, 0, 10, 10),
-                      child: Wrap(
-                        children: [
-                          Image.asset(
-                            e.imageUrl,
-                            width: double.infinity,
-                            fit: BoxFit.cover,
-                          ),
-                          ListTile(
-                            title: Text(e.name),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                );
-              }).toList(),
-            ),
-          ),
+          // Container(
+          //   height: 250,
+          //   child: ListView(
+          //     scrollDirection: Axis.horizontal,
+          //     children: availableClubs.map((e) {
+          //       return Container(
+          //         width: 200,
+          //         child: InkWell(
+          //           onTap: () => {
+          //             Navigator.of(context).pushReplacementNamed("/oneClub",
+          //                 arguments: {"id": e.id})
+          //           },
+          //           child: Card(
+          //             elevation: 5.0,
+          //             margin: EdgeInsets.fromLTRB(10, 0, 10, 10),
+          //             child: Wrap(
+          //               children: [
+          //                 Image.asset(
+          //                   e.imageUrl,
+          //                   width: double.infinity,
+          //                   fit: BoxFit.cover,
+          //                 ),
+          //                 ListTile(
+          //                   title: Text(e.name),
+          //                 )
+          //               ],
+          //             ),
+          //           ),
+          //         ),
+          //       );
+          //     }).toList(),
+          //   ),
+          // ),
           // SingleChildScrollView(
           //   scrollDirection: Axis.horizontal,
           //   child: Row(

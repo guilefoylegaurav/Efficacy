@@ -22,7 +22,8 @@ class _FeedScreenState extends State<FeedScreen> {
   @override
   Widget build(BuildContext context) {
     List<EventCloud> events = Provider.of<List<EventCloud>>(context);
-    if (events == null) {
+    List<Club> clubs = Provider.of<List<Club>>(context);
+    if (events == null || clubs == null) {
       return Scaffold(
         body: Loader(),
         appBar: AppBar(
@@ -36,31 +37,26 @@ class _FeedScreenState extends State<FeedScreen> {
       );
     } else {
       return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            "Feed",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+          appBar: AppBar(
+            title: Text(
+              "Feed",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+            ),
+            elevation: 0,
           ),
-          elevation: 0,
-        ),
-        drawer: Drawer(
-          child: SideBar(
-            clubList: clubList,
-          ),
-        ),
-        body: StreamProvider.value(
-          value: DatabaseService().eventsFromCloud,
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                  children: events.map((e) {
-                return EventTile(event: e);
-              }).toList()),
+          drawer: Drawer(
+            child: SideBar(
+              clubList: clubs,
             ),
           ),
-        ),
-      );
+          body: ListView.builder(
+            itemBuilder: (c, i) {
+              return EventTile(
+                event: events[i],
+              );
+            },
+            itemCount: events.length,
+          ));
     }
   }
 }

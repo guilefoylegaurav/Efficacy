@@ -7,11 +7,11 @@ class ImageLoader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.blue[50],
+      color: Colors.orange[50],
       height: 150,
       child: Center(
         child: SpinKitWanderingCubes(
-          color: Colors.blue[300],
+          color: Color(hexColor(BG)),
           size: 50.0,
         ),
       ),

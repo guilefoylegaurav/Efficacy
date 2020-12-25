@@ -1,3 +1,4 @@
+import 'package:Efficacy/models/club.dart';
 import 'package:Efficacy/models/eventCloud.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
@@ -8,6 +9,8 @@ class DatabaseService {
   final CollectionReference eventCollection =
       Firestore.instance.collection('events');
 
+  final CollectionReference clubCollection =
+      Firestore.instance.collection('clubs');
   EventCloud _eventFromSnapshot(DocumentSnapshot snapshot) {
     return EventCloud(
       id: snapshot.data()["id"] ?? '1',
@@ -20,10 +23,48 @@ class DatabaseService {
     );
   }
 
+  Club _clubFromSnapshot(DocumentSnapshot snapshot) {
+    return Club(
+      id: snapshot.data()["id"] ?? 'id missing',
+      name: snapshot.data()["name"] ?? 'name missing',
+      imageUrl: snapshot.data()["imageUrl"] ?? 'image unavailable',
+      desc: snapshot.data()["desc"] ?? 'description unavailable',
+      fb: snapshot.data()["fb"] ?? 'link unavailable',
+    );
+  }
+
+  Stream<Club> get fetchClub {
+    return clubCollection.document(id).snapshots().map((club) {
+      return _clubFromSnapshot(club);
+    });
+  }
+
+  // Future<void> getSingleEvent(String id) async {
+  //   return eventCollection.document(id).get().then((value) {
+  //     print(value.data());
+  //   });
+  // }
+
   Stream<EventCloud> get fetchEvent {
     return eventCollection.document(id).snapshots().map((event) {
       return _eventFromSnapshot(event);
     });
+  }
+
+  List<Club> _clubListFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.documents.map((doc) {
+      return Club(
+        id: doc.data()["id"],
+        name: doc.data()["name"] ?? 'event title',
+        desc: doc.data()["desc"] ?? 'Desc needed',
+        imageUrl: doc.data()["imageUrl"] ?? 'image missing',
+        fb: doc.data()["fb"] ?? "link unavailable",
+      );
+    }).toList();
+  }
+
+  Stream<List<Club>> get clubsFromCloud {
+    return clubCollection.snapshots().map(_clubListFromSnapshot);
   }
 
   List<EventCloud> _eventListFromSnapshot(QuerySnapshot snapshot) {
@@ -41,6 +82,9 @@ class DatabaseService {
   }
 
   Stream<List<EventCloud>> get eventsFromCloud {
-    return eventCollection.snapshots().map(_eventListFromSnapshot);
+    return eventCollection
+        .orderBy("timestamp", descending: true)
+        .snapshots()
+        .map(_eventListFromSnapshot);
   }
 }
