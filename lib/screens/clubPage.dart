@@ -1,13 +1,11 @@
 import 'package:Efficacy/config.dart';
 import 'package:Efficacy/models/club.dart';
-import 'package:Efficacy/services/data.dart';
 import 'package:Efficacy/services/database.dart';
 import 'package:Efficacy/utilities/utilities.dart';
 import 'package:Efficacy/widgets/description.dart';
 import 'package:Efficacy/widgets/loaders/loader.dart';
 // import 'package:Efficacy/widgets/eventTile.dart';
 import 'package:Efficacy/widgets/sabt.dart';
-import 'package:Efficacy/widgets/tile.dart';
 import 'package:flutter/material.dart';
 
 class ClubPage extends StatefulWidget {
@@ -18,6 +16,7 @@ class ClubPage extends StatefulWidget {
 class _ClubPageState extends State<ClubPage> {
   @override
   Widget build(BuildContext context) {
+
     final routeArgs =
         ModalRoute.of(context).settings.arguments as Map<String, String>;
     final id = routeArgs['id'];
@@ -83,7 +82,10 @@ class _ClubPageState extends State<ClubPage> {
                           borderRadius: BorderRadius.circular(50),
                         ),
                         child: TabBarView(children: [
-                          Text("Under construction"),
+                          Container(child: Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Text("Under construction"),
+                          )),
                           // widget(child: EventsbyClub()),
                           SingleChildScrollView(
                               child: DescriptionSection(club: club)),

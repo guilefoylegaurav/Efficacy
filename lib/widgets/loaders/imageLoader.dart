@@ -1,5 +1,3 @@
-import 'package:Efficacy/config.dart';
-import 'package:Efficacy/utilities/utilities.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
@@ -11,7 +9,7 @@ class ImageLoader extends StatelessWidget {
       height: 150,
       child: Center(
         child: SpinKitWanderingCubes(
-          color: Color(hexColor(BG)),
+          color: Colors.teal,
           size: 50.0,
         ),
       ),

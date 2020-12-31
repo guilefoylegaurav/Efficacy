@@ -1,5 +1,5 @@
 import 'package:Efficacy/models/club.dart';
-import 'package:Efficacy/services/data.dart';
+import 'package:Efficacy/screens/eventScreen.dart';
 import 'package:Efficacy/utilities/utilities.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -16,11 +16,8 @@ class DescriptionSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var availableClubs = clubList.where((element) {
-      return club.name != element.name;
-    });
     return Padding(
-      padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+      padding: const EdgeInsets.all(25),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -33,13 +30,16 @@ class DescriptionSection extends StatelessWidget {
             title: Text("Link"),
           ),
           Text(
-            "About Us",
+            "About Club",
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           SizedBox(
             height: 10,
           ),
-          Text(club.desc),
+          Text(
+            club.desc,
+            textAlign: TextAlign.justify,
+          ),
           Padding(
             padding: EdgeInsets.fromLTRB(50, 30, 50, 30),
             child: Container(
@@ -55,49 +55,34 @@ class DescriptionSection extends StatelessWidget {
           SizedBox(
             height: 20,
           ),
-          // Container(
-          //   height: 250,
-          //   child: ListView(
-          //     scrollDirection: Axis.horizontal,
-          //     children: availableClubs.map((e) {
-          //       return Container(
-          //         width: 200,
-          //         child: InkWell(
-          //           onTap: () => {
-          //             Navigator.of(context).pushReplacementNamed("/oneClub",
-          //                 arguments: {"id": e.id})
-          //           },
-          //           child: Card(
-          //             elevation: 5.0,
-          //             margin: EdgeInsets.fromLTRB(10, 0, 10, 10),
-          //             child: Wrap(
-          //               children: [
-          //                 Image.asset(
-          //                   e.imageUrl,
-          //                   width: double.infinity,
-          //                   fit: BoxFit.cover,
-          //                 ),
-          //                 ListTile(
-          //                   title: Text(e.name),
-          //                 )
-          //               ],
-          //             ),
-          //           ),
-          //         ),
-          //       );
-          //     }).toList(),
-          //   ),
-          // ),
-          // SingleChildScrollView(
-          //   scrollDirection: Axis.horizontal,
-          //   child: Row(
-          //     children: clubList
-          //         .map((e) => Card(
-          //               child: Text(e.name),
-          //             ))
-          //         .toList(),
-          //   ),
-          // ),
+          Center(
+            child: Column(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15)
+                  ),
+                  child: FlatButton.icon(
+                    icon: Icon(
+                      MdiIcons.facebook,
+                      color: Colors.white,
+                    ),
+                    onPressed: () async {
+                      await launchURL(club.fb);
+                    },
+                    label: Text(
+                      "Follow",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: font,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    color: Colors.blue,
+                  ),
+                ),
+              ],
+            ),
+          )
         ],
       ),
     );

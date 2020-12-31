@@ -1,14 +1,8 @@
-import 'package:Efficacy/config.dart';
 import 'package:Efficacy/models/club.dart';
-import 'package:Efficacy/models/event.dart';
 import 'package:Efficacy/models/eventCloud.dart';
-import 'package:Efficacy/services/data.dart';
-import 'package:Efficacy/services/database.dart';
-import 'package:Efficacy/utilities/utilities.dart';
 import 'package:Efficacy/widgets/tile.dart';
 // import 'package:Efficacy/widgets/eventTile.dart';
 import 'package:Efficacy/widgets/loaders/loader.dart';
-import 'package:Efficacy/widgets/sabt.dart';
 import 'package:Efficacy/widgets/sidebar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -29,8 +23,10 @@ class _FeedScreenState extends State<FeedScreen> {
         appBar: AppBar(
           elevation: 0,
           leading: Icon(Icons.menu),
+          backgroundColor: Colors.red,
           title: Text(
-            "Feed",
+            "Home",
+            textAlign: TextAlign.center,
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
           ),
         ),
@@ -39,7 +35,7 @@ class _FeedScreenState extends State<FeedScreen> {
       return Scaffold(
           appBar: AppBar(
             title: Text(
-              "Feed",
+              "Home",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
             ),
             elevation: 0,

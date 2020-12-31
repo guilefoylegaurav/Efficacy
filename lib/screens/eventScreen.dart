@@ -4,8 +4,8 @@ import 'package:Efficacy/models/eventCloud.dart';
 import 'package:Efficacy/services/database.dart';
 import 'package:Efficacy/utilities/utilities.dart';
 import 'package:Efficacy/widgets/line.dart';
-import 'package:Efficacy/widgets/line.dart';
 import 'package:Efficacy/widgets/loaders/loader.dart';
+import 'package:Efficacy/widgets/sabt.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -56,13 +56,21 @@ class _EventDescriptionState extends State<EventDescription> {
                   event.picture,
                   width: double.infinity,
                   fit: BoxFit.cover,
-                )),
+                ),
+                  centerTitle: true,
+                  title: SABT(
+                    child: Text(
+                      event.title,
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    )
+                  ),
+                ),
               ),
               SliverList(
                   delegate: SliverChildListDelegate(
                 [
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(15, 25, 15, 25),
+                    padding: const EdgeInsets.fromLTRB(15, 15, 15, 15),
                     child: Text(
                       event.title,
                       style:
@@ -80,7 +88,7 @@ class _EventDescriptionState extends State<EventDescription> {
                       Icons.location_on,
                     ),
                   ),
-                  Line(L: 50, R: 50, T: 40, B: 40),
+                  Line(L: 50, R: 50, T: 20, B: 20),
                   Padding(
                     padding: EdgeInsets.fromLTRB(15, 0, 15, 25),
                     child: Text(
@@ -92,12 +100,6 @@ class _EventDescriptionState extends State<EventDescription> {
                   Padding(
                     padding: EdgeInsets.fromLTRB(15, 0, 15, 25),
                     child: Text(event.about),
-                  ),
-                  Line(L: 50, R: 50, T: 35, B: 50),
-                  Row(
-                    children: [
-                      ClubFacebook(),
-                    ],
                   ),
                   Padding(
                     padding: EdgeInsets.fromLTRB(15, 0, 15, 10),
@@ -114,6 +116,12 @@ class _EventDescriptionState extends State<EventDescription> {
                             color: Colors.white),
                       ),
                     ),
+                  ),
+                  Line(L: 50, R: 50, T: 15, B: 22),
+                  Row(
+                    children: [
+                      ClubFacebook(),
+                    ],
                   ),
                 ],
               ))
