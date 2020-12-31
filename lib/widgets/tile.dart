@@ -1,11 +1,6 @@
-import 'package:Efficacy/config.dart';
 import 'package:Efficacy/models/eventCloud.dart';
-import 'package:Efficacy/services/data.dart';
-import 'package:Efficacy/utilities/utilities.dart';
 import 'package:Efficacy/widgets/loaders/imageLoader.dart';
 import 'package:flutter/material.dart';
-import 'package:Efficacy/models/event.dart';
-import 'dart:math';
 
 import 'package:intl/intl.dart';
 
@@ -22,19 +17,19 @@ class EventTile extends StatelessWidget {
         child: Card(
           elevation: 0,
           child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+            ),
             width: double.infinity,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Stack(children: [
                   ImageLoader(),
-                  Container(
-                    constraints: BoxConstraints(maxHeight: 200),
-                    child: Image.network(
-                      event.picture,
-                      width: double.infinity,
-                      fit: BoxFit.cover,
-                    ),
+                  Image.network(
+                    event.picture,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
                   ),
                 ]),
                 Padding(
@@ -42,12 +37,12 @@ class EventTile extends StatelessWidget {
                   padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
                   child: Text(
                     DateFormat.yMMMEd().format(event.timings) +
-                        ' | ' +
+                        '|' +
                         DateFormat.jm().format(event.timings),
                     style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Color(hexColor(BG)),
-                    ),
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blue,
+                        fontFamily: "CenturyGothic"),
                   ),
                 ),
                 Padding(
@@ -64,7 +59,7 @@ class EventTile extends StatelessWidget {
                     children: [
                       Text(
                         event.clubName,
-                        style: TextStyle(fontSize: 15, color: Colors.grey),
+                        style: TextStyle(fontSize: 15, color: Colors.deepOrangeAccent),
                       ),
                       // Container(
                       //     child: Wrap(
@@ -79,6 +74,7 @@ class EventTile extends StatelessWidget {
                     ],
                   ),
                 ),
+                Divider(height: 20.0,)
               ],
             ),
           ),
