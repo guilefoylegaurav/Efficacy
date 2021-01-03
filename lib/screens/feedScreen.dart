@@ -10,8 +10,11 @@ import 'package:Efficacy/widgets/tile.dart';
 import 'package:Efficacy/widgets/loaders/loader.dart';
 import 'package:Efficacy/widgets/sabt.dart';
 import 'package:Efficacy/widgets/sidebar.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:paginate_firestore/bloc/pagination_listeners.dart';
 import 'package:provider/provider.dart';
+import 'package:paginate_firestore/paginate_firestore.dart';
 
 class FeedScreen extends StatefulWidget {
   @override
@@ -21,42 +24,74 @@ class FeedScreen extends StatefulWidget {
 class _FeedScreenState extends State<FeedScreen> {
   @override
   Widget build(BuildContext context) {
-    List<EventCloud> events = Provider.of<List<EventCloud>>(context);
-    List<Club> clubs = Provider.of<List<Club>>(context);
-    if (events == null || clubs == null) {
-      return Scaffold(
-        body: Loader(),
+    PaginateRefreshedChangeListener refreshChangeListener =
+        PaginateRefreshedChangeListener();
+
+    // List<EventCloud> events = Provider.of<List<EventCloud>>(context);
+    List<Club> clubs = Provider.of<List<Club>>(context) ?? [];
+    // if (events == null || clubs == null) {
+    //   return Scaffold(
+    //     body: Loader(),
+    //     appBar: AppBar(
+    //       elevation: 0,
+    //       leading: Icon(Icons.menu),
+    //       title: Text(
+    //         "Feed",
+    //         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+    //       ),
+    //     ),
+    //   );
+    // } else {
+    return Scaffold(
         appBar: AppBar(
-          elevation: 0,
-          leading: Icon(Icons.menu),
+          centerTitle: true,
           title: Text(
             "Feed",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
           ),
+          elevation: 0,
         ),
-      );
-    } else {
-      return Scaffold(
-          appBar: AppBar(
-            title: Text(
-              "Feed",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
-            ),
-            elevation: 0,
+        drawer: Drawer(
+          child: SideBar(
+            clubList: clubs,
           ),
-          drawer: Drawer(
-            child: SideBar(
-              clubList: clubs,
-            ),
-          ),
-          body: ListView.builder(
-            itemBuilder: (c, i) {
+        ),
+        // body: ListView.builder(
+        //   itemBuilder: (c, i) {
+        //     return EventTile(
+        //       event: events[i],
+        //     );
+        //   },
+        //   itemCount: events.length,
+        // )
+        body: RefreshIndicator(
+          onRefresh: () async {
+            refreshChangeListener.refreshed = true;
+          },
+          child: PaginateFirestore(
+            itemBuilder: (index, context, snapshot) {
+              EventCloud e = EventCloud(
+                id: snapshot.data()["id"] ?? '1',
+                title: snapshot.data()["title"] ?? 'event title',
+                picture: snapshot.data()["picture"] ?? 'picture url',
+                clubId: snapshot.data()["clubId"] ?? 'clubid',
+                clubName: snapshot.data()["clubName"] ?? 'clubname',
+                about: snapshot.data()["about"] ?? 'about',
+                timings: DateTime.parse(
+                    snapshot.data()["timings"] ?? "2021-01-01 12:00:00.000"),
+              );
+
               return EventTile(
-                event: events[i],
+                event: e,
               );
             },
-            itemCount: events.length,
-          ));
-    }
+            query: FirebaseFirestore.instance.collection('events'),
+            listeners: [
+              refreshChangeListener,
+            ],
+            itemBuilderType: PaginateBuilderType.listView,
+          ),
+        ));
   }
 }
+// }
