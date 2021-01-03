@@ -1,7 +1,9 @@
 import 'package:Efficacy/config.dart';
 import 'package:Efficacy/models/club.dart';
 import 'package:Efficacy/utilities/utilities.dart';
+import 'package:Efficacy/widgets/line.dart';
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class SideBar extends StatelessWidget {
   List<Club> clubList;
@@ -12,35 +14,32 @@ class SideBar extends StatelessWidget {
     return ListView(
       padding: EdgeInsets.zero,
       children: <Widget>[
-        DrawerHeader(
-          decoration: BoxDecoration(color: Colors.grey[200]),
-          child: ListTile(
-            leading: CircleAvatar(
-              child: Text("A"),
+        Container(
+          padding: EdgeInsets.fromLTRB(0, 40, 0, 0),
+          child: Center(
+            child: ListTile(
+              leading: CircleAvatar(
+                  child: ClipRRect(
+                borderRadius: BorderRadius.circular(15),
+                child: Image.asset("assets/efficacy_logo.jpg"),
+              )),
+              title: Text(
+                "Efficacy",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
-            title: Text(
-              "Guest",
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            subtitle: Text("NITS Student"),
           ),
         ),
-        ListTile(
-          leading: Icon(Icons.home),
-          title: Text(
-            'Home',
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-          onTap: () {
-            Navigator.pop(context);
-          },
-        ),
+        Line(L: 0, R: 0, T: 0, B: 0),
+
         ExpansionTile(
           title: Text(
             "Clubs",
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
-          leading: Icon(Icons.people),
+          leading: Icon(Icons.people_outline),
           children: clubList.map((e) {
             return ListTile(
                 title: Text(
@@ -61,9 +60,15 @@ class SideBar extends StatelessWidget {
             'Settings',
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
-          onTap: () {
-            Navigator.pop(context);
-          },
+          onTap: () {},
+        ),
+        ListTile(
+          leading: Icon(Icons.help_outline),
+          title: Text(
+            'Help and Feedback',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          onTap: () {},
         ),
 
         // Container(

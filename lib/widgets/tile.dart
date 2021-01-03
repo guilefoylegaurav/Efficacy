@@ -28,10 +28,13 @@ class EventTile extends StatelessWidget {
               children: [
                 Stack(children: [
                   ImageLoader(),
-                  Image.network(
-                    event.picture,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
+                  Container(
+                    constraints: BoxConstraints(maxHeight: 200),
+                    child: Image.network(
+                      event.picture,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ]),
                 Padding(
@@ -39,12 +42,12 @@ class EventTile extends StatelessWidget {
                   padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
                   child: Text(
                     DateFormat.yMMMEd().format(event.timings) +
-                        '|' +
+                        ' | ' +
                         DateFormat.jm().format(event.timings),
                     style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Color(hexColor(BG)),
-                        fontFamily: "CenturyGothic"),
+                      fontWeight: FontWeight.bold,
+                      color: Color(hexColor(BG)),
+                    ),
                   ),
                 ),
                 Padding(
