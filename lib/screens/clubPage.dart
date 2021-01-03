@@ -128,7 +128,7 @@ class _ClubPageState extends State<ClubPage> {
                                 itemBuilderType: PaginateBuilderType.listView,
                               ),
                             ),
-                         ,
+                        
                           SingleChildScrollView(
                               child: DescriptionSection(club: club)),
                         ]),
