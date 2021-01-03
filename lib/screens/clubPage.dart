@@ -91,9 +91,9 @@ class _ClubPageState extends State<ClubPage> {
                         ),
                         child: TabBarView(children: [
                           // Text("Under construction"),
-                          StreamProvider.value(
-                            value: DatabaseService(id: id).eventsPerClub,
-                            child: RefreshIndicator(
+                         
+                           
+                         RefreshIndicator(
                               onRefresh: () async {
                                 refreshChangeListener.refreshed = true;
                               },
@@ -128,7 +128,7 @@ class _ClubPageState extends State<ClubPage> {
                                 itemBuilderType: PaginateBuilderType.listView,
                               ),
                             ),
-                          ),
+                         ,
                           SingleChildScrollView(
                               child: DescriptionSection(club: club)),
                         ]),
