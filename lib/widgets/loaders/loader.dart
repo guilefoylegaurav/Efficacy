@@ -8,9 +8,10 @@ class Loader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Center(
-        child: SpinKitFadingCircle(
-          color: Color(hexColor(BG)),
-          size: 50.0,
+        child: SpinKitRing(
+          color: Colors.blue,
+          size: 40,
+          lineWidth: 2,
         ),
       ),
     );
