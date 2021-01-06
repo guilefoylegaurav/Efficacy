@@ -87,4 +87,12 @@ class DatabaseService {
         .snapshots()
         .map(_eventListFromSnapshot);
   }
+
+  Stream<List<EventCloud>> get eventsPerClub {
+    return eventCollection
+        .orderBy("timestamp", descending: true)
+        .where("clubId", isEqualTo: id)
+        .snapshots()
+        .map(_eventListFromSnapshot);
+  }
 }

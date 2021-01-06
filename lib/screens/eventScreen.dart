@@ -1,12 +1,16 @@
+import 'dart:io';
+
 import 'package:Efficacy/config.dart';
 import 'package:Efficacy/models/club.dart';
 import 'package:Efficacy/models/eventCloud.dart';
 import 'package:Efficacy/services/database.dart';
 import 'package:Efficacy/utilities/utilities.dart';
 import 'package:Efficacy/widgets/line.dart';
+
 import 'package:Efficacy/widgets/loaders/loader.dart';
-import 'package:Efficacy/widgets/sabt.dart';
+
 import 'package:flutter/material.dart';
+
 import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
@@ -44,6 +48,10 @@ class _EventDescriptionState extends State<EventDescription> {
       return StreamProvider.value(
         value: DatabaseService(id: event.clubId).fetchClub,
         child: Scaffold(
+          floatingActionButton: FloatingActionButton.extended(
+              // icon: Icon(MdiIcons.pin),
+              label: Text("Interested"),
+              onPressed: () {}),
           body: CustomScrollView(
             slivers: [
               SliverAppBar(
@@ -56,21 +64,13 @@ class _EventDescriptionState extends State<EventDescription> {
                   event.picture,
                   width: double.infinity,
                   fit: BoxFit.cover,
-                ),
-                  centerTitle: true,
-                  title: SABT(
-                    child: Text(
-                      event.title,
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    )
-                  ),
-                ),
+                )),
               ),
               SliverList(
                   delegate: SliverChildListDelegate(
                 [
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(15, 15, 15, 15),
+                    padding: const EdgeInsets.fromLTRB(15, 25, 15, 25),
                     child: Text(
                       event.title,
                       style:
@@ -88,7 +88,7 @@ class _EventDescriptionState extends State<EventDescription> {
                       Icons.location_on,
                     ),
                   ),
-                  Line(L: 50, R: 50, T: 20, B: 20),
+                  Line(L: 50, R: 50, T: 40, B: 40),
                   Padding(
                     padding: EdgeInsets.fromLTRB(15, 0, 15, 25),
                     child: Text(
@@ -99,7 +99,15 @@ class _EventDescriptionState extends State<EventDescription> {
                   ),
                   Padding(
                     padding: EdgeInsets.fromLTRB(15, 0, 15, 25),
-                    child: Text(event.about),
+                    child: Text(
+                      event.about.replaceAll('/n', '\n'),
+                    ),
+                  ),
+                  Line(L: 50, R: 50, T: 35, B: 50),
+                  Row(
+                    children: [
+                      ClubFacebook(),
+                    ],
                   ),
                   Padding(
                     padding: EdgeInsets.fromLTRB(15, 0, 15, 10),
@@ -111,17 +119,9 @@ class _EventDescriptionState extends State<EventDescription> {
                       child: Text(
                         "Details",
                         style: TextStyle(
-                            fontFamily: font,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
+                            fontWeight: FontWeight.bold, color: Colors.white),
                       ),
                     ),
-                  ),
-                  Line(L: 50, R: 50, T: 15, B: 22),
-                  Row(
-                    children: [
-                      ClubFacebook(),
-                    ],
                   ),
                 ],
               ))
@@ -136,17 +136,30 @@ class _EventDescriptionState extends State<EventDescription> {
 class ClubFacebook extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Club c = Provider.of<Club>(context);
+    Club c = Provider.of<Club>(context) ??
+        Club(
+            id: "unavailable",
+            imageUrl: "unavailable",
+            name: "unavailable",
+            desc: "unavailable",
+            fb: "unavailable");
+
     return Expanded(
         child: Column(
       children: [
-        Container(
-          height: 100,
-          width: 100,
-          decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              image: DecorationImage(
-                  image: NetworkImage(c.imageUrl), fit: BoxFit.cover)),
+        InkWell(
+          onTap: () {
+            Navigator.of(context)
+                .pushNamed("/oneClub", arguments: {"id": c.id});
+          },
+          child: Container(
+            height: 100,
+            width: 100,
+            decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                image: DecorationImage(
+                    image: NetworkImage(c.imageUrl), fit: BoxFit.cover)),
+          ),
         ),
         SizedBox(
           height: 15,
@@ -168,10 +181,7 @@ class ClubFacebook extends StatelessWidget {
           },
           label: Text(
             "Follow",
-            style: TextStyle(
-                color: Colors.white,
-                fontFamily: font,
-                fontWeight: FontWeight.bold),
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
           color: Colors.blue,
         ),

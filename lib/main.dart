@@ -23,17 +23,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        textTheme: TextTheme(
-          bodyText1: TextStyle(fontFamily: "CenturyGothic"),
-          bodyText2: TextStyle(fontFamily: "CenturyGothic"),
-        ),
+        textTheme: TextTheme(),
         backgroundColor: Colors.white,
         primaryColor: Colors.white,
-        primaryTextTheme: TextTheme(
-          headline6: TextStyle(fontFamily: font, fontWeight: FontWeight.bold),
-        ),
+        primaryTextTheme: TextTheme(),
       ),
       routes: {
         "/": (context) => Wrapper(),

@@ -36,6 +36,10 @@ dependencies:
   intl: ^0.16.1
   flutter_spinkit: "^4.1.2"
   url_launcher: ^5.7.6
+  paginate_firestore: ^0.2.2
+  
+
+  
 
 dev_dependencies:
   flutter_test:
