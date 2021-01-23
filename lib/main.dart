@@ -20,6 +20,8 @@ void main() async {
   runApp(OverlaySupport(child: MyApp()));
 }
 
+final GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
+
 class MyApp extends StatefulWidget {
   @override
   _MyAppState createState() => _MyAppState();
@@ -61,7 +63,8 @@ class _MyAppState extends State<MyApp> {
         print(message['notification']['title']);
       },
       onResume: (message) async {
-        print(message["data"]["title"]);
+        print(message["data"]["click_action"]);
+        navigatorKey.currentState.pushReplacementNamed("/");
       },
     );
   }
@@ -70,6 +73,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      navigatorKey: navigatorKey,
       title: 'Flutter Demo',
       theme: ThemeData(
         textTheme: TextTheme(),
