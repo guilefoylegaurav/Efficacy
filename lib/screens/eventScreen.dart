@@ -1,5 +1,6 @@
 import 'dart:io';
-
+import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 import 'package:Efficacy/config.dart';
 import 'package:Efficacy/models/club.dart';
 import 'package:Efficacy/models/eventCloud.dart';
@@ -70,13 +71,17 @@ class _EventDescriptionState extends State<EventDescription> {
             importance: Importance.max, priority: Priority.high);
         var iOSPlatformChannelSpecifics = new IOSNotificationDetails();
         var platformChannelSpecifics = new NotificationDetails();
-        await flutterLocalNotificationsPlugin.show(
-          0,
-          event.title,
-          event.about,
-          platformChannelSpecifics,
-          payload: 'Default_Sound',
-        );
+        tz.initializeTimeZones();
+        await flutterLocalNotificationsPlugin.zonedSchedule (
+            0,
+            event.title,
+            event.about,
+            tz.TZDateTime.now(tz.local).add(const Duration(seconds: 5)),
+            const NotificationDetails(
+                android: AndroidNotificationDetails('your channel id', 'your channel name', 'your channel description')),
+            androidAllowWhileIdle: true,
+            uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime);
       }
       return StreamProvider.value(
         value: DatabaseService(id: event.clubId).fetchClub,
