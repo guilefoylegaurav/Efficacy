@@ -54,7 +54,7 @@ class EventTile extends StatelessWidget {
                   padding: const EdgeInsets.fromLTRB(10, 15, 0, 0),
                   child: Text(
                     event.title,
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                   ),
                 ),
                 Padding(
@@ -64,7 +64,7 @@ class EventTile extends StatelessWidget {
                     children: [
                       Text(
                         event.clubName,
-                        style: TextStyle(fontSize: 15, color: Colors.grey),
+                        style: TextStyle(fontSize: 20, color: Colors.grey),
                       ),
                       // Container(
                       //     child: Wrap(
