@@ -36,7 +36,8 @@ dependencies:
   intl: ^0.16.1
   flutter_spinkit: "^4.1.2"
   url_launcher: ^5.7.6
-  paginate_firestore: ^0.2.2
+  paginate_firestore: ^0.2.0
+  flutter_local_notifications: ^4.0.0
   firebase_messaging: ^7.0.3
   overlay_support: ^1.0.5
   
