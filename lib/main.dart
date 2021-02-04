@@ -36,37 +36,51 @@ class _MyAppState extends State<MyApp> {
     _firebaseMessaging.getToken().then((value) => print("token" + value));
     _firebaseMessaging.subscribeToTopic('active');
     _firebaseMessaging.configure(
-      onMessage: (Map<String, dynamic> message) async {
-        // print("onMessage: $message");
-        showOverlayNotification((context) {
-          return Card(
-            margin: const EdgeInsets.symmetric(horizontal: 4),
-            child: SafeArea(
-              child: ListTile(
-                leading: CircleAvatar(
-                    child: ClipRRect(
-                  borderRadius: BorderRadius.circular(15),
-                  child: Image.asset("assets/efficacy_logo.jpg"),
-                )),
-                title: Text(message['notification']['title']),
-                subtitle: Text(message['notification']['body']),
-                trailing: IconButton(
-                    icon: Icon(Icons.close),
-                    onPressed: () {
-                      OverlaySupportEntry.of(context).dismiss();
-                    }),
-              ),
+        onMessage: (Map<String, dynamic> message) async {
+      // print("onMessage: $message");
+      showOverlayNotification((context) {
+        return Card(
+          margin: const EdgeInsets.symmetric(horizontal: 4),
+          child: SafeArea(
+            child: ListTile(
+              onTap: () {
+                print("onMessage event id" + message["data"]["id"].toString());
+                navigatorKey.currentState.pushNamed("/event",
+                    arguments: {"id": message["data"]["id"].toString()});
+              },
+              leading: CircleAvatar(
+                  child: ClipRRect(
+                borderRadius: BorderRadius.circular(15),
+                child: Image.asset("assets/efficacy_logo.jpg"),
+              )),
+              title: Text(message['notification']['title']),
+              subtitle: Text(message['notification']['body']),
+              trailing: IconButton(
+                  icon: Icon(Icons.close),
+                  onPressed: () {
+                    OverlaySupportEntry.of(context).dismiss();
+                  }),
             ),
-          );
-        }, duration: Duration(milliseconds: 4000));
+          ),
+        );
+      }, duration: Duration(milliseconds: 4000));
 
-        print(message['notification']['title']);
-      },
-      onResume: (message) async {
-        print(message["data"]["click_action"]);
-        navigatorKey.currentState.pushReplacementNamed("/");
-      },
-    );
+      print(message['notification']['title']);
+    }, onResume: (message) async {
+      print(message["data"]["click_action"]);
+      print("Data ID" +
+          message["data"]["id"] +
+          "type" +
+          (message["data"]["id"] is String).toString());
+      navigatorKey.currentState.pushNamed("/event",
+          arguments: {"id": message["data"]["id"].toString()});
+    }, onLaunch: (Map<String, dynamic> message) async {
+      print("onLaunch: $message");
+      print(message["data"]["id"]);
+      navigatorKey.currentState.pushReplacementNamed("/");
+      navigatorKey.currentState.pushNamed("/event",
+          arguments: {"id": message["data"]["id"].toString()});
+    });
   }
 
   @override

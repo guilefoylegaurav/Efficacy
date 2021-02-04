@@ -114,7 +114,8 @@ class _EventDescriptionState extends State<EventDescription> {
                     child: FlatButton(
                       color: Color(hexColor(BG)),
                       onPressed: () async {
-                        await launchURL("www.google.com");
+                        await launchURL(
+                            "https://www.facebook.com/Illuminits/photos/a.123550321173027/1483665005161545/");
                       },
                       child: Text(
                         "Details",

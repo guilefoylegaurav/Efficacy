@@ -12,8 +12,9 @@ class DatabaseService {
   final CollectionReference clubCollection =
       Firestore.instance.collection('clubs');
   EventCloud _eventFromSnapshot(DocumentSnapshot snapshot) {
+    print("Event Id from database service " + snapshot.reference.documentID);
     return EventCloud(
-      id: snapshot.data()["id"] ?? '1',
+      id: snapshot.documentID ?? 'NULL ID DATABASE SERVICE EVENTCLOUD',
       title: snapshot.data()["title"] ?? 'event title',
       picture: snapshot.data()["picture"] ?? 'picture url',
       clubId: snapshot.data()["clubId"] ?? 'clubid',
@@ -70,7 +71,7 @@ class DatabaseService {
   List<EventCloud> _eventListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
       return EventCloud(
-        id: doc.data()["id"],
+        id: doc.documentID.toString() ?? "No ID",
         title: doc.data()["title"] ?? 'event title',
         picture: doc.data()["picture"] ?? 'picture url',
         clubId: doc.data()["clubId"] ?? 'clubid',

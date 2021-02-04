@@ -71,7 +71,7 @@ class _FeedScreenState extends State<FeedScreen> {
           child: PaginateFirestore(
             itemBuilder: (index, context, snapshot) {
               EventCloud e = EventCloud(
-                id: snapshot.data()["id"] ?? '1',
+                id: snapshot.documentID ?? 'NULL ID PAGINATION',
                 title: snapshot.data()["title"] ?? 'event title',
                 picture: snapshot.data()["picture"] ?? 'picture url',
                 clubId: snapshot.data()["clubId"] ?? 'clubid',
