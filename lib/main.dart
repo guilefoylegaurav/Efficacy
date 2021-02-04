@@ -1,6 +1,10 @@
+import 'dart:async';
+
 import 'package:Efficacy/screens/clubPage.dart';
 import 'package:Efficacy/screens/eventScreen.dart';
 import 'package:Efficacy/screens/feedScreen.dart';
+import 'package:connectivity/connectivity.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:overlay_support/overlay_support.dart';
 import './screens/profile.dart';
 import './screens/wrapper.dart';
@@ -29,10 +33,30 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+  bool connection = false;
+  var _connectionStatus = 'Unknown';
+  Connectivity connectivity;
+  StreamSubscription<ConnectivityResult> subscription;
 
   @override
   void initState() {
     super.initState();
+    connectivity = new Connectivity();
+    subscription =
+        connectivity.onConnectivityChanged.listen((ConnectivityResult result) {
+      _connectionStatus = result.toString();
+      print(_connectionStatus);
+      if (result == ConnectivityResult.wifi ||
+          result == ConnectivityResult.mobile) {
+        setState(() {
+          connection = true;
+        });
+      } else {
+        setState(() {
+          connection = false;
+        });
+      }
+    });
     _firebaseMessaging.getToken().then((value) => print("token" + value));
     _firebaseMessaging.subscribeToTopic('active');
     _firebaseMessaging.configure(
@@ -84,6 +108,12 @@ class _MyAppState extends State<MyApp> {
   }
 
   @override
+  void dispose() {
+    subscription.cancel();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -96,13 +126,52 @@ class _MyAppState extends State<MyApp> {
         primaryTextTheme: TextTheme(),
       ),
       routes: {
-        "/": (context) => Wrapper(),
-        "/register": (context) => Register(),
-        "/clubs": (context) => Clubs(),
-        "/profile": (context) => Profile(),
-        "/event": (context) => EventScreen(),
-        "/oneClub": (context) => ClubPage(),
+        "/": (context) => (connection) ? Wrapper() : NoInternet(),
+        "/register": (context) => (connection) ? Register() : NoInternet(),
+        "/clubs": (context) => (connection) ? Clubs() : NoInternet(),
+        "/profile": (context) => (connection) ? Profile() : NoInternet(),
+        "/event": (context) => (connection) ? EventScreen() : NoInternet(),
+        "/oneClub": (context) => (connection) ? ClubPage() : NoInternet(),
       },
+    );
+  }
+}
+
+class NoInternet extends StatelessWidget {
+  const NoInternet({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      // appBar: AppBar(
+      //   elevation: 0.0,
+      //   backgroundColor: Colors.white,
+      //   title: Text(""),
+      // ),
+      body: Center(
+        child: Column(
+          children: [
+            Icon(
+              MdiIcons.wifiOff,
+              size: 40,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              "Oh no!",
+              style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+            ),
+            Text(
+              "No internet connection",
+              style: TextStyle(fontSize: 18.0),
+            )
+          ],
+          mainAxisAlignment: MainAxisAlignment.center,
+        ),
+      ),
     );
   }
 }

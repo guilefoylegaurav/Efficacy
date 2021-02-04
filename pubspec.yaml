@@ -39,6 +39,7 @@ dependencies:
   paginate_firestore: ^0.2.2
   firebase_messaging: ^7.0.3
   overlay_support: ^1.0.5
+  connectivity: ^2.0.2
   
 
   
