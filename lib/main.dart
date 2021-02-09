@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'package:Efficacy/screens/noInternet.dart';
 import 'package:Efficacy/screens/clubPage.dart';
 import 'package:Efficacy/screens/eventScreen.dart';
 import 'package:Efficacy/screens/feedScreen.dart';
@@ -133,45 +133,6 @@ class _MyAppState extends State<MyApp> {
         "/event": (context) => (connection) ? EventScreen() : NoInternet(),
         "/oneClub": (context) => (connection) ? ClubPage() : NoInternet(),
       },
-    );
-  }
-}
-
-class NoInternet extends StatelessWidget {
-  const NoInternet({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      // appBar: AppBar(
-      //   elevation: 0.0,
-      //   backgroundColor: Colors.white,
-      //   title: Text(""),
-      // ),
-      body: Center(
-        child: Column(
-          children: [
-            Icon(
-              MdiIcons.wifiOff,
-              size: 40,
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Text(
-              "Oh no!",
-              style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-            ),
-            Text(
-              "No internet connection",
-              style: TextStyle(fontSize: 18.0),
-            )
-          ],
-          mainAxisAlignment: MainAxisAlignment.center,
-        ),
-      ),
     );
   }
 }
