@@ -16,6 +16,7 @@ class EventTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
+        print("Event Id" + event.id);
         Navigator.of(context).pushNamed("/event", arguments: {"id": event.id});
       },
       child: ClipRRect(
