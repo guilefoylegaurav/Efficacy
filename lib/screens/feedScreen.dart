@@ -76,7 +76,7 @@ class _FeedScreenState extends State<FeedScreen> {
                 title: snapshot.data()["title"] ?? 'event title',
                 startTime:
                     snapshot.data()["startTime"].toDate() ?? DateTime.now(),
-                imageUrl: snapshot.data()["imageUrl"] ?? 'picture url',
+                imageUrl: snapshot.data()["imageUrl"] ?? fallbackURL_image,
                 googleFormLink: snapshot.data()["googleFormLink"] ?? '',
                 fbPostLink: snapshot.data()["fbPostLink"] ?? '',
                 endTime: snapshot.data()["endTime"].toDate() ?? DateTime.now(),

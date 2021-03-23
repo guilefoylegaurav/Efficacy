@@ -1,3 +1,4 @@
+import 'package:Efficacy/config.dart';
 import 'package:Efficacy/models/club.dart';
 import 'package:Efficacy/models/eventCloud.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -17,7 +18,7 @@ class DatabaseService {
         id: snapshot.documentID ?? 'NULL ID DATABASE SERVICE EVENTCLOUD',
         title: snapshot.data()["title"] ?? 'event title',
         startTime: snapshot.data()["startTime"].toDate() ?? DateTime.now(),
-        imageUrl: snapshot.data()["imageUrl"] ?? 'picture url',
+        imageUrl: snapshot.data()["imageUrl"] ?? fallbackURL_image,
         googleFormLink: snapshot.data()["googleFormLink"] ?? '',
         fbPostLink: snapshot.data()["fbPostLink"] ?? '',
         endTime: snapshot.data()["endTime"].toDate() ?? DateTime.now(),
