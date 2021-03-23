@@ -1,6 +1,7 @@
 import 'package:Efficacy/config.dart';
 import 'package:Efficacy/models/club.dart';
 import 'package:Efficacy/models/eventCloud.dart';
+import 'package:Efficacy/models/people.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
 
@@ -12,10 +13,38 @@ class DatabaseService {
 
   final CollectionReference clubCollection =
       Firestore.instance.collection('clubs');
+
+  final CollectionReference adminCollection =
+      Firestore.instance.collection('admins');
+
+  Person _adminsFromSnapshot(DocumentSnapshot snapshot) {
+    return Person(
+      id: snapshot.documentID ?? 'id missing',
+      name: snapshot.data()["adminName"] ?? 'name missing',
+      imageUrl: snapshot.data()["imageUrl"] ?? fallbackURL_profile,
+      fb: snapshot.data()["fb"] ?? 'link unavailable',
+    );
+  }
+
+  List<Person> _adminListFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.documents.map((doc) {
+      return _adminsFromSnapshot(doc);
+    }).toList();
+  }
+
+  Stream<List<Person>> get adminsPerClub {
+    return adminCollection
+        .where("clubId", isEqualTo: id)
+        .snapshots()
+        .map(_adminListFromSnapshot);
+  }
+
   EventCloud _eventFromSnapshot(DocumentSnapshot snapshot) {
     print("Event Id from database service " + snapshot.reference.documentID);
+
     return EventCloud(
         id: snapshot.documentID ?? 'NULL ID DATABASE SERVICE EVENTCLOUD',
+        venue: snapshot.data()["venue"] ?? '',
         title: snapshot.data()["title"] ?? 'event title',
         startTime: snapshot.data()["startTime"].toDate() ?? DateTime.now(),
         imageUrl: snapshot.data()["imageUrl"] ?? fallbackURL_image,

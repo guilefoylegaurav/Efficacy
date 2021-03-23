@@ -40,18 +40,16 @@ class EventDescription extends StatefulWidget {
 class _EventDescriptionState extends State<EventDescription> {
   @override
   Widget build(BuildContext context) {
-
-
     EventCloud event = Provider.of<EventCloud>(context);
     if (event == null) {
       return Scaffold(
         body: Loader(),
       );
     } else {
-      Future onSelectNotification(String payload) async{
+      Future onSelectNotification(String payload) async {
         showDialog(
           context: context,
-          builder: (_){
+          builder: (_) {
             return new AlertDialog(
               title: Text(event.title),
               content: Text("Payload: $payload"),
@@ -59,37 +57,44 @@ class _EventDescriptionState extends State<EventDescription> {
           },
         );
       }
-      FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
-      var initializationSettingsAndroid = new AndroidInitializationSettings('@mipmap/ic_launcher');
-      var initializationSettingsIOS = new IOSInitializationSettings();
-      var initializationSettings = new InitializationSettings(android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
-      flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
-      flutterLocalNotificationsPlugin.initialize(initializationSettings, onSelectNotification: onSelectNotification);
-      Future _scheduleNotification() async {
-        var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
-            'your channel id', 'your channel name', 'your channel description',
-            importance: Importance.max, priority: Priority.high);
-        var iOSPlatformChannelSpecifics = new IOSNotificationDetails();
-        var platformChannelSpecifics = new NotificationDetails();
-        tz.initializeTimeZones();
-        await flutterLocalNotificationsPlugin.zonedSchedule (
-            0,
-            event.title,
-            event.about,
-            tz.TZDateTime.now(tz.local).add(const Duration(seconds: 5)),
-            const NotificationDetails(
-                android: AndroidNotificationDetails('your channel id', 'your channel name', 'your channel description')),
-            androidAllowWhileIdle: true,
-            uiLocalNotificationDateInterpretation:
-            UILocalNotificationDateInterpretation.absoluteTime);
-      }
+
+      // FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
+      // var initializationSettingsAndroid =
+      //     new AndroidInitializationSettings('@mipmap/ic_launcher');
+      // var initializationSettingsIOS = new IOSInitializationSettings();
+      // var initializationSettings = new InitializationSettings(
+      //     android: initializationSettingsAndroid,
+      //     iOS: initializationSettingsIOS);
+      // flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
+      // flutterLocalNotificationsPlugin.initialize(initializationSettings,
+      //     onSelectNotification: onSelectNotification);
+      // Future _scheduleNotification() async {
+      //   var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
+      //       'your channel id', 'your channel name', 'your channel description',
+      //       importance: Importance.max, priority: Priority.high);
+      //   var iOSPlatformChannelSpecifics = new IOSNotificationDetails();
+      //   var platformChannelSpecifics = new NotificationDetails();
+      //   tz.initializeTimeZones();
+      //   await flutterLocalNotificationsPlugin.zonedSchedule(
+      //       0,
+      //       event.title,
+      //       event.about,
+      //       tz.TZDateTime.now(tz.local).add(const Duration(seconds: 5)),
+      //       const NotificationDetails(
+      //           android: AndroidNotificationDetails('your channel id',
+      //               'your channel name', 'your channel description')),
+      //       androidAllowWhileIdle: true,
+      //       uiLocalNotificationDateInterpretation:
+      //           UILocalNotificationDateInterpretation.absoluteTime);
+      // }
+
       return StreamProvider.value(
         value: DatabaseService(id: event.clubId).fetchClub,
         child: Scaffold(
-          floatingActionButton: FloatingActionButton.extended(
-              // icon: Icon(MdiIcons.pin),
-              label: Text("Interested"),
-              onPressed: _scheduleNotification),
+          // floatingActionButton: FloatingActionButton.extended(
+          //     // icon: Icon(MdiIcons.pin),
+          //     label: Text("Interested"),
+          //     onPressed: _scheduleNotification),
           body: CustomScrollView(
             slivers: [
               SliverAppBar(
@@ -116,12 +121,18 @@ class _EventDescriptionState extends State<EventDescription> {
                     ),
                   ),
                   ListTile(
-                    title: Text(DateFormat.yMMMEd().format(event.startTime)),
-                    subtitle: Text(DateFormat.jm().format(event.startTime)),
+                    title: Text(
+                        DateFormat.jm().format(event.startTime).toString() +
+                            ", " +
+                            DateFormat.MMMd().format(event.startTime) +
+                            "-" +
+                            DateFormat.jm().format(event.endTime).toString() +
+                            ", " +
+                            DateFormat.MMMd().format(event.endTime)),
                     leading: Icon(Icons.calendar_today),
                   ),
                   ListTile(
-                    title: Text("Venue"),
+                    title: Text(event.venue),
                     leading: Icon(
                       Icons.location_on,
                     ),
@@ -141,7 +152,57 @@ class _EventDescriptionState extends State<EventDescription> {
                       event.about.replaceAll('/n', '\n'),
                     ),
                   ),
-                  Line(L: 50, R: 50, T: 35, B: 50),
+                  Line(L: 50, R: 50, T: 30, B: 50),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(15, 0, 15, 25),
+                    child: Text(
+                      "Details",
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(15, 0, 15, 25),
+                    child: Row(
+                      children: [
+                        FlatButton.icon(
+                          icon: Icon(
+                            MdiIcons.facebook,
+                            color: Colors.white,
+                          ),
+                          onPressed: () async {
+                            await launchURL(event.fbPostLink);
+                          },
+                          label: Text(
+                            "Post",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          color: Colors.blue,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        FlatButton.icon(
+                          icon: Icon(
+                            MdiIcons.google,
+                            color: Colors.white,
+                          ),
+                          onPressed: () async {
+                            await launchURL(event.googleFormLink);
+                          },
+                          label: Text(
+                            "Google form",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          color: Colors.orangeAccent,
+                        ),
+                      ],
+                    ),
+                  ),
                   Row(
                     children: [
                       ClubFacebook(),
@@ -171,10 +232,6 @@ class _EventDescriptionState extends State<EventDescription> {
     }
   }
 }
-
-
-
-
 
 class ClubFacebook extends StatelessWidget {
   @override

@@ -1,8 +1,12 @@
 import 'package:Efficacy/models/club.dart';
-import 'package:Efficacy/screens/eventScreen.dart';
+import 'package:Efficacy/services/database.dart';
 import 'package:Efficacy/utilities/utilities.dart';
+import 'package:Efficacy/widgets/adminTiles.dart';
+import 'package:Efficacy/widgets/line.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../config.dart';
 
@@ -16,74 +20,106 @@ class DescriptionSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(25),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            club.name,
-            style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
-          ),
-          ListTile(
-            leading: Icon(MdiIcons.web, color: Colors.grey[400]),
-            title: Text("Link"),
-          ),
-          Text(
-            "About Club",
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Text(
-            club.desc,
-            textAlign: TextAlign.justify,
-          ),
-          Padding(
-            padding: EdgeInsets.fromLTRB(50, 30, 50, 30),
-            child: Container(
-              height: 1.0,
-              width: double.infinity,
-              color: Color(hexColor(grayBG)),
-            ),
-          ),
-          Text(
-            "Discover More",
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Center(
-            child: Column(
-              children: [
-                Container(
-                  decoration:
-                      BoxDecoration(borderRadius: BorderRadius.circular(15)),
-                  child: FlatButton.icon(
-                    icon: Icon(
-                      MdiIcons.facebook,
-                      color: Colors.white,
-                    ),
-                    onPressed: () async {
-                      await launchURL(club.fb);
-                    },
-                    label: Text(
-                      "Follow",
-                      style: TextStyle(
-                          color: Colors.white,
-                          // fontFamily: font,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    color: Colors.blue,
-                  ),
-                ),
-              ],
-            ),
-          )
-        ],
+    return Container(
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Padding(
+        padding: const EdgeInsets.fromLTRB(15, 25, 15, 25),
+        child: Text(
+          club.name,
+          style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+        ),
       ),
-    );
+      Padding(
+        padding: EdgeInsets.fromLTRB(15, 0, 15, 25),
+        child: Text(
+          "About Us",
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
+      ),
+      Padding(
+        padding: EdgeInsets.fromLTRB(15, 0, 15, 25),
+        child: Text(
+          club.desc.replaceAll('/n', '\n'),
+        ),
+      ),
+      Line(L: 50, R: 50, T: 25, B: 25),
+      Padding(
+        padding: const EdgeInsets.fromLTRB(15, 25, 15, 25),
+        child: Text(
+          "Social Links",
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
+      ),
+      Padding(
+        padding: EdgeInsets.fromLTRB(10, 0, 15, 25),
+        child: Row(children: [
+          IconButton(
+              icon: Icon(
+                MdiIcons.facebook,
+                color: Colors.blue,
+              ),
+              onPressed: () async {
+                await launch(club.fb);
+              }),
+          // IconButton(
+          //     icon: Icon(
+          //       MdiIcons.instagram,
+          //       color: Colors.pink,
+          //     ),
+          //     onPressed: () {}),
+          // IconButton(
+          //     icon: Icon(
+          //       MdiIcons.twitter,
+          //       color: Colors.lightBlue,
+          //     ),
+          //     onPressed: () {}),
+        ]),
+      ),
+      Line(L: 50, R: 50, T: 25, B: 25),
+      Padding(
+        padding: const EdgeInsets.fromLTRB(15, 25, 15, 25),
+        child: Text(
+          "People",
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
+      ),
+      Padding(
+        padding: const EdgeInsets.fromLTRB(15, 0, 15, 25),
+        child: MultiProvider(
+          providers: [
+            StreamProvider.value(
+                value: DatabaseService(id: club.id).adminsPerClub),
+          ],
+          child: AdminTiles(),
+        ),
+      ),
+
+      // Padding(
+      //   padding: const EdgeInsets.all(8.0),
+      //   child: Container(
+      //     margin: EdgeInsets.fromLTRB(15, 25, 15, 25),
+      //     height: 200.0,
+      //     child: ListView(
+      //       scrollDirection: Axis.horizontal,
+      //       children: <Widget>[
+      //         Card(
+      //           child: Container(
+      //             width: 160.0,
+      //             child: Column(
+      //               children: [
+      //                 Expanded(
+      //                   child: Row(
+      //                       children: [Expanded(child: Icon(Icons.person))]),
+      //                 ),
+      //                 Text("Admin")
+      //               ],
+      //             ),
+      //           ),
+      //         ),
+      //       ],
+      //     ),
+      //   ),
+      // ),
+    ]));
   }
 }

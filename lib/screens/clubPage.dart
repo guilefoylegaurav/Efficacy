@@ -107,7 +107,7 @@ class _ClubPageState extends State<ClubPage> {
                                         snapshot.data()["startTime"].toDate() ??
                                             DateTime.now(),
                                     imageUrl: snapshot.data()["imageUrl"] ??
-                                        'picture url',
+                                        fallbackURL_image,
                                     googleFormLink:
                                         snapshot.data()["googleFormLink"] ?? '',
                                     fbPostLink:
