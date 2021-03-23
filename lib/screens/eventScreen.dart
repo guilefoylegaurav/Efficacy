@@ -1,14 +1,15 @@
 import 'dart:io';
-
+import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 import 'package:Efficacy/config.dart';
 import 'package:Efficacy/models/club.dart';
 import 'package:Efficacy/models/eventCloud.dart';
 import 'package:Efficacy/services/database.dart';
 import 'package:Efficacy/utilities/utilities.dart';
 import 'package:Efficacy/widgets/line.dart';
-
+import 'dart:async';
 import 'package:Efficacy/widgets/loaders/loader.dart';
-
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter/material.dart';
 
 import 'package:intl/intl.dart';
@@ -39,19 +40,56 @@ class EventDescription extends StatefulWidget {
 class _EventDescriptionState extends State<EventDescription> {
   @override
   Widget build(BuildContext context) {
+
+
     EventCloud event = Provider.of<EventCloud>(context);
     if (event == null) {
       return Scaffold(
         body: Loader(),
       );
     } else {
+      Future onSelectNotification(String payload) async{
+        showDialog(
+          context: context,
+          builder: (_){
+            return new AlertDialog(
+              title: Text(event.title),
+              content: Text("Payload: $payload"),
+            );
+          },
+        );
+      }
+      FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
+      var initializationSettingsAndroid = new AndroidInitializationSettings('@mipmap/ic_launcher');
+      var initializationSettingsIOS = new IOSInitializationSettings();
+      var initializationSettings = new InitializationSettings(android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
+      flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
+      flutterLocalNotificationsPlugin.initialize(initializationSettings, onSelectNotification: onSelectNotification);
+      Future _scheduleNotification() async {
+        var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
+            'your channel id', 'your channel name', 'your channel description',
+            importance: Importance.max, priority: Priority.high);
+        var iOSPlatformChannelSpecifics = new IOSNotificationDetails();
+        var platformChannelSpecifics = new NotificationDetails();
+        tz.initializeTimeZones();
+        await flutterLocalNotificationsPlugin.zonedSchedule (
+            0,
+            event.title,
+            event.about,
+            tz.TZDateTime.now(tz.local).add(const Duration(seconds: 5)),
+            const NotificationDetails(
+                android: AndroidNotificationDetails('your channel id', 'your channel name', 'your channel description')),
+            androidAllowWhileIdle: true,
+            uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime);
+      }
       return StreamProvider.value(
         value: DatabaseService(id: event.clubId).fetchClub,
         child: Scaffold(
           floatingActionButton: FloatingActionButton.extended(
               // icon: Icon(MdiIcons.pin),
               label: Text("Interested"),
-              onPressed: () {}),
+              onPressed: _scheduleNotification),
           body: CustomScrollView(
             slivers: [
               SliverAppBar(
@@ -133,6 +171,10 @@ class _EventDescriptionState extends State<EventDescription> {
     }
   }
 }
+
+
+
+
 
 class ClubFacebook extends StatelessWidget {
   @override

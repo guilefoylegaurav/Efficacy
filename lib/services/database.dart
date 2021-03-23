@@ -29,7 +29,7 @@ class DatabaseService {
                 .toDate()
                 .difference(snapshot.data()["startTime"].toDate())
                 .inHours ??
-            "");
+            2);
   }
 
   Club _clubFromSnapshot(DocumentSnapshot snapshot) {

@@ -126,7 +126,7 @@ class _ClubPageState extends State<ClubPage> {
                                                 .data()["startTime"]
                                                 .toDate())
                                             .inHours ??
-                                        "");
+                                        2);
 
                                 return EventTile(
                                   event: e,
