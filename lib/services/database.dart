@@ -19,11 +19,10 @@ class DatabaseService {
 
   Person _adminsFromSnapshot(DocumentSnapshot snapshot) {
     return Person(
-      id: snapshot.documentID ?? 'id missing',
-      name: snapshot.data()["adminName"] ?? 'name missing',
-      imageUrl: snapshot.data()["imageUrl"] ?? fallbackURL_profile,
-      fb: snapshot.data()["fb"] ?? 'link unavailable',
-    );
+        id: snapshot.documentID ?? 'id missing',
+        name: snapshot.data()["adminName"] ?? 'name missing',
+        imageUrl: snapshot.data()["imageUrl"] ?? fallbackURL_profile,
+        fb: snapshot.data()["fb"] ?? fallbackURLweb);
   }
 
   List<Person> _adminListFromSnapshot(QuerySnapshot snapshot) {
@@ -48,8 +47,8 @@ class DatabaseService {
         title: snapshot.data()["title"] ?? 'event title',
         startTime: snapshot.data()["startTime"].toDate() ?? DateTime.now(),
         imageUrl: snapshot.data()["imageUrl"] ?? fallbackURL_image,
-        googleFormLink: snapshot.data()["googleFormLink"] ?? '',
-        fbPostLink: snapshot.data()["fbPostLink"] ?? '',
+        googleFormLink: snapshot.data()["googleFormLink"] ?? fallbackURLweb,
+        fbPostLink: snapshot.data()["fbPostLink"] ?? fallbackURLweb,
         endTime: snapshot.data()["endTime"].toDate() ?? DateTime.now(),
         clubId: snapshot.data()["clubId"] ?? 'clubid',
         clubName: snapshot.data()["clubName"] ?? 'clubname',
@@ -66,9 +65,9 @@ class DatabaseService {
     return Club(
       id: snapshot.data()["id"] ?? 'id missing',
       name: snapshot.data()["name"] ?? 'name missing',
-      imageUrl: snapshot.data()["imageUrl"] ?? 'image unavailable',
+      imageUrl: snapshot.data()["imageUrl"] ?? fallbackClubURL,
       desc: snapshot.data()["desc"] ?? 'description unavailable',
-      fb: snapshot.data()["fb"] ?? 'link unavailable',
+      fb: snapshot.data()["fb"] ?? fallbackURLweb,
     );
   }
 
@@ -92,13 +91,7 @@ class DatabaseService {
 
   List<Club> _clubListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
-      return Club(
-        id: doc.data()["id"],
-        name: doc.data()["name"] ?? 'event title',
-        desc: doc.data()["desc"] ?? 'Desc needed',
-        imageUrl: doc.data()["imageUrl"] ?? 'image missing',
-        fb: doc.data()["fb"] ?? "link unavailable",
-      );
+      return _clubFromSnapshot(doc);
     }).toList();
   }
 
@@ -114,7 +107,7 @@ class DatabaseService {
 
   Stream<List<EventCloud>> get eventsFromCloud {
     return eventCollection
-        .orderBy("timestamp", descending: true)
+        .orderBy("startTime", descending: true)
         .snapshots()
         .map(_eventListFromSnapshot);
   }

@@ -5,3 +5,6 @@ String grayBG = "#E3E3E3";
 String blueBG = "#4D80E4";
 String fallbackURL_profile =
     "https://cdn1.vectorstock.com/i/thumb-large/77/30/default-avatar-profile-icon-grey-photo-placeholder-vector-17317730.jpg";
+String fallbackClubURL =
+    "https://www.pngkey.com/png/full/84-849089_keratoconus-academy-membership-plans-social-club-icon.png";
+String fallbackURLweb = "https://www.google.com/";

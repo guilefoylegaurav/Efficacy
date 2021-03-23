@@ -125,7 +125,7 @@ class _EventDescriptionState extends State<EventDescription> {
                         DateFormat.jm().format(event.startTime).toString() +
                             ", " +
                             DateFormat.MMMd().format(event.startTime) +
-                            "-" +
+                            " to " +
                             DateFormat.jm().format(event.endTime).toString() +
                             ", " +
                             DateFormat.MMMd().format(event.endTime)),
