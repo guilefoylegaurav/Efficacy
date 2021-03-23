@@ -71,14 +71,24 @@ class _FeedScreenState extends State<FeedScreen> {
           child: PaginateFirestore(
             itemBuilder: (index, context, snapshot) {
               EventCloud e = EventCloud(
-                id: snapshot.documentID ?? 'NULL ID PAGINATION',
+                id: snapshot.documentID ??
+                    'NULL ID DATABASE SERVICE EVENTCLOUD',
                 title: snapshot.data()["title"] ?? 'event title',
-                picture: snapshot.data()["picture"] ?? 'picture url',
+                startTime:
+                    snapshot.data()["startTime"].toDate() ?? DateTime.now(),
+                imageUrl: snapshot.data()["imageUrl"] ?? 'picture url',
+                googleFormLink: snapshot.data()["googleFormLink"] ?? '',
+                fbPostLink: snapshot.data()["fbPostLink"] ?? '',
+                endTime: snapshot.data()["endTime"].toDate() ?? DateTime.now(),
                 clubId: snapshot.data()["clubId"] ?? 'clubid',
                 clubName: snapshot.data()["clubName"] ?? 'clubname',
                 about: snapshot.data()["about"] ?? 'about',
-                timings: DateTime.parse(
-                    snapshot.data()["timings"] ?? "2021-01-01 12:00:00.000"),
+                duration: snapshot
+                        .data()["endTime"]
+                        .toDate()
+                        .difference(snapshot.data()["startTime"].toDate())
+                        .inHours ??
+                    "",
               );
 
               return EventTile(

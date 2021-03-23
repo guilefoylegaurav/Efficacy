@@ -14,14 +14,22 @@ class DatabaseService {
   EventCloud _eventFromSnapshot(DocumentSnapshot snapshot) {
     print("Event Id from database service " + snapshot.reference.documentID);
     return EventCloud(
-      id: snapshot.documentID ?? 'NULL ID DATABASE SERVICE EVENTCLOUD',
-      title: snapshot.data()["title"] ?? 'event title',
-      picture: snapshot.data()["picture"] ?? 'picture url',
-      clubId: snapshot.data()["clubId"] ?? 'clubid',
-      clubName: snapshot.data()["clubName"] ?? 'clubname',
-      about: snapshot.data()["about"] ?? 'about',
-      timings: DateTime.parse(snapshot.data()["timings"]),
-    );
+        id: snapshot.documentID ?? 'NULL ID DATABASE SERVICE EVENTCLOUD',
+        title: snapshot.data()["title"] ?? 'event title',
+        startTime: snapshot.data()["startTime"].toDate() ?? DateTime.now(),
+        imageUrl: snapshot.data()["imageUrl"] ?? 'picture url',
+        googleFormLink: snapshot.data()["googleFormLink"] ?? '',
+        fbPostLink: snapshot.data()["fbPostLink"] ?? '',
+        endTime: snapshot.data()["endTime"].toDate() ?? DateTime.now(),
+        clubId: snapshot.data()["clubId"] ?? 'clubid',
+        clubName: snapshot.data()["clubName"] ?? 'clubname',
+        about: snapshot.data()["about"] ?? 'about',
+        duration: snapshot
+                .data()["endTime"]
+                .toDate()
+                .difference(snapshot.data()["startTime"].toDate())
+                .inHours ??
+            "");
   }
 
   Club _clubFromSnapshot(DocumentSnapshot snapshot) {
@@ -70,15 +78,7 @@ class DatabaseService {
 
   List<EventCloud> _eventListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
-      return EventCloud(
-        id: doc.documentID.toString() ?? "No ID",
-        title: doc.data()["title"] ?? 'event title',
-        picture: doc.data()["picture"] ?? 'picture url',
-        clubId: doc.data()["clubId"] ?? 'clubid',
-        clubName: doc.data()["clubName"] ?? 'clubname',
-        about: doc.data()["about"] ?? 'about',
-        timings: DateTime.parse(doc.data()["timings"]),
-      );
+      return _eventFromSnapshot(doc);
     }).toList();
   }
 

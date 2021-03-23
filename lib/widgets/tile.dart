@@ -32,7 +32,7 @@ class EventTile extends StatelessWidget {
                   Container(
                     constraints: BoxConstraints(maxHeight: 200),
                     child: Image.network(
-                      event.picture,
+                      event.imageUrl,
                       width: double.infinity,
                       fit: BoxFit.cover,
                     ),
@@ -42,9 +42,9 @@ class EventTile extends StatelessWidget {
                   //Date
                   padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
                   child: Text(
-                    DateFormat.yMMMEd().format(event.timings) +
+                    DateFormat.yMMMEd().format(event.startTime) +
                         ' | ' +
-                        DateFormat.jm().format(event.timings),
+                        DateFormat.jm().format(event.startTime),
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Color(hexColor(BG)),

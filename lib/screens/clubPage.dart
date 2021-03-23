@@ -91,44 +91,57 @@ class _ClubPageState extends State<ClubPage> {
                         ),
                         child: TabBarView(children: [
                           // Text("Under construction"),
-                         
-                           
-                         RefreshIndicator(
-                              onRefresh: () async {
-                                refreshChangeListener.refreshed = true;
-                              },
-                              child: PaginateFirestore(
-                                itemBuilder: (index, context, snapshot) {
-                                  EventCloud e = EventCloud(
-                                    id: snapshot.data()["id"] ?? '1',
+
+                          RefreshIndicator(
+                            onRefresh: () async {
+                              refreshChangeListener.refreshed = true;
+                            },
+                            child: PaginateFirestore(
+                              itemBuilder: (index, context, snapshot) {
+                                EventCloud e = EventCloud(
+                                    id: snapshot.documentID ??
+                                        'NULL ID DATABASE SERVICE EVENTCLOUD',
                                     title: snapshot.data()["title"] ??
                                         'event title',
-                                    picture: snapshot.data()["picture"] ??
+                                    startTime:
+                                        snapshot.data()["startTime"].toDate() ??
+                                            DateTime.now(),
+                                    imageUrl: snapshot.data()["imageUrl"] ??
                                         'picture url',
+                                    googleFormLink:
+                                        snapshot.data()["googleFormLink"] ?? '',
+                                    fbPostLink:
+                                        snapshot.data()["fbPostLink"] ?? '',
+                                    endTime: snapshot.data()["endTime"].toDate() ??
+                                        DateTime.now(),
                                     clubId:
                                         snapshot.data()["clubId"] ?? 'clubid',
                                     clubName: snapshot.data()["clubName"] ??
                                         'clubname',
                                     about: snapshot.data()["about"] ?? 'about',
-                                    timings: DateTime.parse(
-                                        snapshot.data()["timings"] ??
-                                            "2021-01-01 12:00:00.000"),
-                                  );
+                                    duration: snapshot
+                                            .data()["endTime"]
+                                            .toDate()
+                                            .difference(snapshot
+                                                .data()["startTime"]
+                                                .toDate())
+                                            .inHours ??
+                                        "");
 
-                                  return EventTile(
-                                    event: e,
-                                  );
-                                },
-                                query: FirebaseFirestore.instance
-                                    .collection('events')
-                                    .where("clubId", isEqualTo: id),
-                                listeners: [
-                                  refreshChangeListener,
-                                ],
-                                itemBuilderType: PaginateBuilderType.listView,
-                              ),
+                                return EventTile(
+                                  event: e,
+                                );
+                              },
+                              query: FirebaseFirestore.instance
+                                  .collection('events')
+                                  .where("clubId", isEqualTo: id),
+                              listeners: [
+                                refreshChangeListener,
+                              ],
+                              itemBuilderType: PaginateBuilderType.listView,
                             ),
-                        
+                          ),
+
                           SingleChildScrollView(
                               child: DescriptionSection(club: club)),
                         ]),

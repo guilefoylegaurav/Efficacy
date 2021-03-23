@@ -61,7 +61,7 @@ class _EventDescriptionState extends State<EventDescription> {
                 expandedHeight: 200,
                 flexibleSpace: FlexibleSpaceBar(
                     background: Image.network(
-                  event.picture,
+                  event.imageUrl,
                   width: double.infinity,
                   fit: BoxFit.cover,
                 )),
@@ -78,8 +78,8 @@ class _EventDescriptionState extends State<EventDescription> {
                     ),
                   ),
                   ListTile(
-                    title: Text(DateFormat.yMMMEd().format(event.timings)),
-                    subtitle: Text(DateFormat.jm().format(event.timings)),
+                    title: Text(DateFormat.yMMMEd().format(event.startTime)),
+                    subtitle: Text(DateFormat.jm().format(event.startTime)),
                     leading: Icon(Icons.calendar_today),
                   ),
                   ListTile(
