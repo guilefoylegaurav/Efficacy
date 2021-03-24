@@ -11,6 +11,7 @@ import 'package:Efficacy/widgets/loaders/loader.dart';
 import 'package:Efficacy/widgets/sabt.dart';
 import 'package:Efficacy/widgets/sidebar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:paginate_firestore/bloc/pagination_listeners.dart';
 import 'package:provider/provider.dart';
@@ -26,6 +27,7 @@ class _FeedScreenState extends State<FeedScreen> {
   Widget build(BuildContext context) {
     // PaginateRefreshedChangeListener refreshChangeListener =
     //     PaginateRefreshedChangeListener();
+    Size size=MediaQuery.of(context).size;
 
     List<EventCloud> events = Provider.of<List<EventCloud>>(context);
     List<Club> clubs = Provider.of<List<Club>>(context) ?? [];
@@ -43,27 +45,83 @@ class _FeedScreenState extends State<FeedScreen> {
       );
     } else {
       return Scaffold(
-          appBar: AppBar(
-            centerTitle: true,
-            title: Text(
-              "Feed",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
-            ),
-            elevation: 0,
+        appBar: AppBar(
+          centerTitle: true,
+          // title: Text(
+          //   "Feed",
+          //   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+          // ),
+          backgroundColor: Colors.blue[400],
+
+          elevation: 0,
+        ),
+        drawer: Drawer(
+          child: SideBar(
+            clubList: clubs,
           ),
-          drawer: Drawer(
-            child: SideBar(
-              clubList: clubs,
-            ),
+        ),
+        body:SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            children: [
+              Container(
+                // height: 100,
+                // width: 100,
+                width:size.width,
+
+                height:size.height*0.2,
+                // color: Color(0xFF42A5F5),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(35),
+                    bottomRight: Radius.circular(35),
+
+                  ),
+                  color: Colors.blue[400],
+
+                ),
+                child: Text(
+                  " DSC",
+                  style: TextStyle(fontWeight: FontWeight.bold,
+                      fontSize: size.height*0.1,color: Colors.white),
+                  textAlign: TextAlign.center,
+
+
+                ),
+
+              ),
+              Container(
+                // color: Colors.blueAccent,
+
+                child: ListView.builder(
+                  itemBuilder: (c, i) {
+                    return EventTile(
+                      event: events[i],
+                    );
+                  },
+                  itemCount: events.length,
+                ),
+
+
+                height:(size.height*0.8)-84,
+                // width: 100,
+                width:size.width,
+
+
+                // color: Colors.blue,
+              )
+            ],
           ),
-          body: ListView.builder(
-            itemBuilder: (c, i) {
-              return EventTile(
-                event: events[i],
-              );
-            },
-            itemCount: events.length,
-          ));
+        ),
+        // ListView.builder(
+        //   itemBuilder: (c, i) {
+        //     return EventTile(
+        //       event: events[i],
+        //     );
+        //   },
+        //   itemCount: events.length,
+        // )
+      );
       // body: RefreshIndicator(
       //   onRefresh: () async {
       //     refreshChangeListener.refreshed = true;
@@ -104,6 +162,7 @@ class _FeedScreenState extends State<FeedScreen> {
       // ));
     }
   }
+
 // }
 
 }
