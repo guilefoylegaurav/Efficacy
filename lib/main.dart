@@ -121,8 +121,8 @@ class _MyAppState extends State<MyApp> {
       title: 'Flutter Demo',
       theme: ThemeData(
         textTheme: TextTheme(),
-        backgroundColor: Colors.white,
-        primaryColor: Colors.white,
+        backgroundColor: Colors.blue,
+        primaryColor: Colors.blue,
         primaryTextTheme: TextTheme(),
       ),
       routes: {

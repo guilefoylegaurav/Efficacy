@@ -48,96 +48,76 @@ class EventTile extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Expanded(
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(10, 15, 0, 0),
-                            child: Flexible(
-                              child: Text(
-                                event.title,
-                                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                              ),
-                            ),
+                    Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(10, 15, 0, 0),
+                          child: Text(
+                            event.title,
+                            style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(10, 14, 0, 14),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(10, 14, 0, 14),
 
-                            child:
-                                  Flexible(
-                                    child:
-                                      Text(
-                                        event.clubName,
-                                        style: TextStyle(fontSize: 20, color: Colors.grey),
-                                        textAlign: TextAlign.center,
-                                      ),
-                                      // Container(
-                                      //     child: Wrap(
-                                      //   children: [
-                                      //     IconButton(
-                                      //         icon: Icon(Icons.share), onPressed: () => {}),
-                                      //     IconButton(
-                                      //         icon: Icon(Icons.favorite_border),
-                                      //         onPressed: () => {})
-                                      //   ],
-                                      // )),
-
-                                  ),
+                          child:
+                                Text(
+                                  event.clubName,
+                                  style: TextStyle(fontSize: 20, color: Colors.grey),
+                                  textAlign: TextAlign.center,
+                                ),
 
 
-                          ),],),
-                    ),
+                        ),],),
                     Padding(
                       //Date
-                      padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
-                      child: Expanded(
-                        child: Column(
-                          children: [
-                            RaisedButton(
-                              // padding: EdgeInsets.symmetric(horizontal: 100.0),
-                              child: Flexible(child: new Text("Details",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),),
-                              ),
+
+                      padding: const EdgeInsets.fromLTRB(20, 10, 0, 0),
+                      child: Column(
+                        children: [
+                          RaisedButton(
+                            // padding: EdgeInsets.symmetric(horizontal: 100.0),
+                            child: new Text("Details",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),),
+                            color: Colors.blueAccent,
+                            shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0),
+                            ),
+                            onPressed:() {
+                              Navigator.of(context).pushNamed("/event", arguments: {"id": event.id});
+                            },
+
+                          ),
+                          Text(
+                            "startTime",
+
+                            // DateFormat.jm().format(event.startTime),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
                               color: Colors.blueAccent,
-                              shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0),
-                              ),
-                              onPressed:() {
-                                Navigator.of(context).pushNamed("/event", arguments: {"id": event.id});
-                              },
-
                             ),
-                            Text(
-                              "startTime",
+                          ),
+                          Text(
+                            DateFormat.yMMMEd().format(event.startTime) ,
 
-                              // DateFormat.jm().format(event.startTime),
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.blueAccent,
-                              ),
+                            // DateFormat.jm().format(event.startTime),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black87,
                             ),
-                            Text(
-                              DateFormat.yMMMEd().format(event.startTime) ,
+                          ),
+                          Text(
+                            // DateFormat.yMMMEd().format(event.startTime) ,
 
-                              // DateFormat.jm().format(event.startTime),
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black87,
-                              ),
+                            DateFormat.jm().format(event.startTime),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black87,
                             ),
-                            Text(
-                              // DateFormat.yMMMEd().format(event.startTime) ,
-
-                              DateFormat.jm().format(event.startTime),
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black87,
-                              ),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                     SizedBox(width: MediaQuery.of(context).size.width*0.1,)

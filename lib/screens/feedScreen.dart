@@ -47,10 +47,10 @@ class _FeedScreenState extends State<FeedScreen> {
       return Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          // title: Text(
-          //   "Feed",
-          //   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
-          // ),
+          title: Text(
+            "Feed",
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+          ),
           backgroundColor: Colors.blue[400],
 
           elevation: 0,
@@ -62,56 +62,27 @@ class _FeedScreenState extends State<FeedScreen> {
         ),
         body:SingleChildScrollView(
           scrollDirection: Axis.vertical,
-          child: Column(
-            children: [
-              Container(
-                // height: 100,
-                // width: 100,
-                width:size.width,
+          child: ClipRRect(
+            child:  Container(
+                  // color: Colors.blueAccent,
 
-                height:size.height*0.2,
-                // color: Color(0xFF42A5F5),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(35),
-                    bottomRight: Radius.circular(35),
-
+                  child: ListView.builder(
+                    itemBuilder: (c, i) {
+                      return EventTile(
+                        event: events[i],
+                      );
+                    },
+                    itemCount: events.length,
                   ),
-                  color: Colors.blue[400],
-
-                ),
-                child: Text(
-                  " DSC",
-                  style: TextStyle(fontWeight: FontWeight.bold,
-                      fontSize: size.height*0.1,color: Colors.white),
-                  textAlign: TextAlign.center,
 
 
-                ),
-
-              ),
-              Container(
-                // color: Colors.blueAccent,
-
-                child: ListView.builder(
-                  itemBuilder: (c, i) {
-                    return EventTile(
-                      event: events[i],
-                    );
-                  },
-                  itemCount: events.length,
-                ),
+                  height:size.height-84,
+                  // width: 100,
+                  width:size.width,
 
 
-                height:(size.height*0.8)-84,
-                // width: 100,
-                width:size.width,
-
-
-                // color: Colors.blue,
-              )
-            ],
-          ),
+                  // color: Colors.blue,
+                ),),
         ),
         // ListView.builder(
         //   itemBuilder: (c, i) {
