@@ -36,7 +36,6 @@ class EventTile extends StatelessWidget {
                 Stack(children: [
                   ImageLoader(),
                   Container(
-
                     constraints: BoxConstraints(maxHeight: 200),
                     child: Image.network(
                       event.imageUrl,
@@ -49,58 +48,67 @@ class EventTile extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(10, 15, 0, 0),
+                          padding: const EdgeInsets.fromLTRB(18, 15, 0, 0),
                           child: Text(
                             event.title,
-                            style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(10, 14, 0, 14),
-
-                          child:
-                                Text(
-                                  event.clubName,
-                                  style: TextStyle(fontSize: 20, color: Colors.grey),
-                                  textAlign: TextAlign.center,
-                                ),
-
-
-                        ),],),
+                          padding: const EdgeInsets.fromLTRB(18, 14, 0, 14),
+                          child: Text(
+                            event.clubName,
+                            style: TextStyle(fontSize: 18, color: Colors.grey),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Expanded(
+                      child: Container(),
+                    ),
                     Padding(
                       //Date
 
-                      padding: const EdgeInsets.fromLTRB(20, 10, 0, 0),
+                      padding: const EdgeInsets.fromLTRB(20, 10, 0, 14),
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           RaisedButton(
                             // padding: EdgeInsets.symmetric(horizontal: 100.0),
-                            child: new Text("Details",
+                            child: new Text(
+                              "Details",
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white,
-                              ),),
+                              ),
+                            ),
                             color: Colors.blueAccent,
-                            shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0),
+                            shape: new RoundedRectangleBorder(
+                              borderRadius: new BorderRadius.circular(30.0),
                             ),
-                            onPressed:() {
-                              Navigator.of(context).pushNamed("/event", arguments: {"id": event.id});
+                            onPressed: () {
+                              Navigator.of(context).pushNamed("/event",
+                                  arguments: {"id": event.id});
                             },
-
                           ),
-                          Text(
-                            "startTime",
+                          // Text(
+                          //   "startTime",
 
-                            // DateFormat.jm().format(event.startTime),
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.blueAccent,
-                            ),
-                          ),
+                          //   // DateFormat.jm().format(event.startTime),
+                          //   style: TextStyle(
+                          //     fontWeight: FontWeight.bold,
+                          //     color: Colors.blueAccent,
+                          //   ),
+                          // ),
                           Text(
-                            DateFormat.yMMMEd().format(event.startTime) ,
+                            DateFormat.jm().format(event.startTime) +
+                                " | " +
+                                DateFormat.MMMd().format(event.startTime),
 
                             // DateFormat.jm().format(event.startTime),
                             style: TextStyle(
@@ -108,22 +116,23 @@ class EventTile extends StatelessWidget {
                               color: Colors.black87,
                             ),
                           ),
-                          Text(
-                            // DateFormat.yMMMEd().format(event.startTime) ,
+                          // Text(
+                          //   // DateFormat.yMMMEd().format(event.startTime) ,
 
-                            DateFormat.jm().format(event.startTime),
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black87,
-                            ),
-                          ),
+                          //   DateFormat.jm().format(event.startTime),
+                          //   style: TextStyle(
+                          //     fontWeight: FontWeight.bold,
+                          //     color: Colors.black87,
+                          //   ),
+                          // ),
                         ],
                       ),
                     ),
-                    SizedBox(width: MediaQuery.of(context).size.width*0.1,)
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.05,
+                    )
                   ],
                 ),
-
               ],
             ),
           ),
