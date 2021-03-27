@@ -59,8 +59,13 @@ class DescriptionSection extends StatelessWidget {
                 color: Colors.blue,
               ),
               onPressed: () async {
-                await launch(club.fb);
+                if (club.fb.length == 0) {
+                  await launch(fallbackURLweb);
+                } else {
+                  await launch(club.fb);
+                }
               }),
+
           // IconButton(
           //     icon: Icon(
           //       MdiIcons.instagram,

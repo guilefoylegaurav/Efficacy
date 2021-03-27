@@ -171,7 +171,11 @@ class _EventDescriptionState extends State<EventDescription> {
                             color: Colors.white,
                           ),
                           onPressed: () async {
-                            await launchURL(event.fbPostLink);
+                            if (event.fbPostLink.length == 0) {
+                              await launchURL(fallbackURLweb);
+                            } else {
+                              await launchURL(event.fbPostLink);
+                            }
                           },
                           label: Text(
                             "Post",
@@ -190,7 +194,11 @@ class _EventDescriptionState extends State<EventDescription> {
                             color: Colors.white,
                           ),
                           onPressed: () async {
-                            await launchURL(event.googleFormLink);
+                            if (event.googleFormLink.length == 0) {
+                              await launchURL(fallbackURLweb);
+                            } else {
+                              await launchURL(event.googleFormLink);
+                            }
                           },
                           label: Text(
                             "Google form",
@@ -213,8 +221,11 @@ class _EventDescriptionState extends State<EventDescription> {
                     child: FlatButton(
                       color: Color(hexColor(BG)),
                       onPressed: () async {
-                        await launchURL(
-                            "https://www.facebook.com/Illuminits/photos/a.123550321173027/1483665005161545/");
+                        if (event.fbPostLink.length == 0) {
+                          await launchURL(fallbackURLweb);
+                        } else {
+                          await launchURL(event.fbPostLink);
+                        }
                       },
                       child: Text(
                         "Details",
@@ -277,7 +288,11 @@ class ClubFacebook extends StatelessWidget {
             color: Colors.white,
           ),
           onPressed: () async {
-            await launchURL(c.fb);
+            if (c.fb.length == 0) {
+              await launchURL(fallbackURLweb);
+            } else {
+              await launchURL(c.fb);
+            }
           },
           label: Text(
             "Follow",

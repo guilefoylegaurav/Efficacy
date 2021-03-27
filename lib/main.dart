@@ -33,7 +33,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
-  bool connection = false;
+  bool connection = true;
   var _connectionStatus = 'Unknown';
   Connectivity connectivity;
   StreamSubscription<ConnectivityResult> subscription;
