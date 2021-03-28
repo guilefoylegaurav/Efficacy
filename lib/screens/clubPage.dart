@@ -15,7 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:paginate_firestore/bloc/pagination_listeners.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:provider/provider.dart';
-
+import 'package:Efficacy/widgets/clubEvent.dart';
 class ClubPage extends StatefulWidget {
   @override
   _ClubPageState createState() => _ClubPageState();
@@ -70,11 +70,12 @@ class _ClubPageState extends State<ClubPage> {
 
                                   indicator: BoxDecoration(
                                       borderRadius: BorderRadius.only(
-                             bottomLeft:Radius.circular(20),
-                                        bottomRight:Radius.circular(20),
+                                      bottomLeft:Radius.circular(10),
+                                        bottomRight:Radius.circular(10),
                             ),
-                                      gradient: LinearGradient(
-                                          colors: [Colors.blue, Colors.blueGrey])),
+                                  color: Colors.blueAccent,
+                                  ),
+
                                   labelPadding: EdgeInsets.symmetric(
                                       horizontal: 2.0, vertical: 1.0),
                                   labelColor: Colors.white,
@@ -135,7 +136,7 @@ class _ClubPageState extends State<ClubPage> {
                                               .inHours ??
                                           2);
 
-                                  return EventTile(
+                                  return ClubEventTile(
                                     event: e,
                                   );
                                 },

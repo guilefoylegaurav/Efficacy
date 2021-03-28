@@ -25,7 +25,7 @@ class EventTile extends StatelessWidget {
         child: Card(
           elevation: 4,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(25),
+            borderRadius: BorderRadius.circular(10),
           ),
           margin: EdgeInsets.all(10),
           child: Container(
@@ -53,7 +53,7 @@ class EventTile extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.fromLTRB(18, 15, 0, 0),
                           child: Text(
-                            event.title,
+                            event.title + " by " + event.clubName,
                             style: TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.bold),
                           ),
@@ -61,9 +61,16 @@ class EventTile extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.fromLTRB(18, 14, 0, 14),
                           child: Text(
-                            event.clubName,
-                            style: TextStyle(fontSize: 18, color: Colors.grey),
-                            textAlign: TextAlign.center,
+                            DateFormat.jm().format(event.startTime) +
+                                " , " +
+                                DateFormat.MMMd().format(event.startTime),
+
+                            // DateFormat.jm().format(event.startTime),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black54,
+
+                            ),
                           ),
                         ),
                       ],
@@ -78,24 +85,51 @@ class EventTile extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          RaisedButton(
+                          OutlineButton(
+
                             // padding: EdgeInsets.symmetric(horizontal: 100.0),
                             child: new Text(
-                              "Details",
+                              "   Details   ",
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                color: Colors.white,
+                                color: Colors.blueAccent,
                               ),
                             ),
                             color: Colors.blueAccent,
+                            highlightColor: Colors.blueAccent,
+                            focusColor: Colors.blueAccent,
+                            borderSide: BorderSide(width: 2.0, color: Colors.blueAccent) ,
                             shape: new RoundedRectangleBorder(
-                              borderRadius: new BorderRadius.circular(30.0),
+                              borderRadius: new BorderRadius.circular(5.0),
                             ),
                             onPressed: () {
                               Navigator.of(context).pushNamed("/event",
                                   arguments: {"id": event.id});
                             },
                           ),
+                          OutlineButton(
+
+                            // padding: EdgeInsets.symmetric(horizontal: 100.0),
+                            child: new Text(
+                              "Club Page",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.redAccent,
+                              ),
+                            ),
+                            color: Colors.redAccent,
+                            highlightColor: Colors.redAccent,
+                            focusColor: Colors.redAccent,
+                            borderSide: BorderSide(width: 2.0, color: Colors.redAccent) ,
+                            shape: new RoundedRectangleBorder(
+                              borderRadius: new BorderRadius.circular(5.0),
+                            ),
+                            onPressed: () {
+                              Navigator.of(context).pushNamed("/oneClub",
+                                  arguments: {"id": event.clubId});
+                            },
+                          ),
+
                           // Text(
                           //   "startTime",
 
@@ -105,17 +139,7 @@ class EventTile extends StatelessWidget {
                           //     color: Colors.blueAccent,
                           //   ),
                           // ),
-                          Text(
-                            DateFormat.jm().format(event.startTime) +
-                                " | " +
-                                DateFormat.MMMd().format(event.startTime),
 
-                            // DateFormat.jm().format(event.startTime),
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black87,
-                            ),
-                          ),
                           // Text(
                           //   // DateFormat.yMMMEd().format(event.startTime) ,
 
