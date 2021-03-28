@@ -54,22 +54,22 @@ class SideBar extends StatelessWidget {
                 });
           }).toList(),
         ),
-        ListTile(
-          leading: Icon(Icons.settings),
-          title: Text(
-            'Settings',
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-          onTap: () {},
-        ),
-        ListTile(
-          leading: Icon(Icons.help_outline),
-          title: Text(
-            'Help and Feedback',
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-          onTap: () {},
-        ),
+        // ListTile(
+        //   leading: Icon(Icons.settings),
+        //   title: Text(
+        //     'Settings',
+        //     style: TextStyle(fontWeight: FontWeight.bold),
+        //   ),
+        //   onTap: () {},
+        // ),
+        // ListTile(
+        //   leading: Icon(Icons.help_outline),
+        //   title: Text(
+        //     'Help and Feedback',
+        //     style: TextStyle(fontWeight: FontWeight.bold),
+        //   ),
+        //   onTap: () {},
+        // ),
 
         // Container(
         //     child: Column(
