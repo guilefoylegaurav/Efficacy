@@ -114,7 +114,7 @@ class DatabaseService {
 
   Stream<List<EventCloud>> get eventsPerClub {
     return eventCollection
-        .orderBy("timestamp", descending: true)
+        .orderBy("startTime", descending: true)
         .where("clubId", isEqualTo: id)
         .snapshots()
         .map(_eventListFromSnapshot);
