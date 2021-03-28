@@ -1,5 +1,7 @@
+import 'package:Efficacy/config.dart';
 import 'package:Efficacy/models/club.dart';
 import 'package:Efficacy/models/eventCloud.dart';
+import 'package:Efficacy/models/people.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
 
@@ -11,26 +13,61 @@ class DatabaseService {
 
   final CollectionReference clubCollection =
       Firestore.instance.collection('clubs');
+
+  final CollectionReference adminCollection =
+      Firestore.instance.collection('admins');
+
+  Person _adminsFromSnapshot(DocumentSnapshot snapshot) {
+    return Person(
+        id: snapshot.documentID ?? 'id missing',
+        name: snapshot.data()["adminName"] ?? 'name missing',
+        imageUrl: snapshot.data()["imageUrl"] ?? fallbackURL_profile,
+        fb: snapshot.data()["fb"] ?? fallbackURLweb);
+  }
+
+  List<Person> _adminListFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.documents.map((doc) {
+      return _adminsFromSnapshot(doc);
+    }).toList();
+  }
+
+  Stream<List<Person>> get adminsPerClub {
+    return adminCollection
+        .where("clubId", isEqualTo: id)
+        .snapshots()
+        .map(_adminListFromSnapshot);
+  }
+
   EventCloud _eventFromSnapshot(DocumentSnapshot snapshot) {
     print("Event Id from database service " + snapshot.reference.documentID);
+
     return EventCloud(
-      id: snapshot.documentID ?? 'NULL ID DATABASE SERVICE EVENTCLOUD',
-      title: snapshot.data()["title"] ?? 'event title',
-      picture: snapshot.data()["picture"] ?? 'picture url',
-      clubId: snapshot.data()["clubId"] ?? 'clubid',
-      clubName: snapshot.data()["clubName"] ?? 'clubname',
-      about: snapshot.data()["about"] ?? 'about',
-      timings: DateTime.parse(snapshot.data()["timings"]),
-    );
+        id: snapshot.documentID ?? 'NULL ID DATABASE SERVICE EVENTCLOUD',
+        venue: snapshot.data()["venue"] ?? '',
+        title: snapshot.data()["title"] ?? 'event title',
+        startTime: snapshot.data()["startTime"].toDate() ?? DateTime.now(),
+        imageUrl: snapshot.data()["imageUrl"] ?? fallbackURL_image,
+        googleFormLink: snapshot.data()["googleFormLink"] ?? fallbackURLweb,
+        fbPostLink: snapshot.data()["fbPostLink"] ?? fallbackURLweb,
+        endTime: snapshot.data()["endTime"].toDate() ?? DateTime.now(),
+        clubId: snapshot.data()["clubId"] ?? 'clubid',
+        clubName: snapshot.data()["clubName"] ?? 'clubname',
+        about: snapshot.data()["about"] ?? 'about',
+        duration: snapshot
+                .data()["endTime"]
+                .toDate()
+                .difference(snapshot.data()["startTime"].toDate())
+                .inHours ??
+            2);
   }
 
   Club _clubFromSnapshot(DocumentSnapshot snapshot) {
     return Club(
       id: snapshot.data()["id"] ?? 'id missing',
       name: snapshot.data()["name"] ?? 'name missing',
-      imageUrl: snapshot.data()["imageUrl"] ?? 'image unavailable',
+      imageUrl: snapshot.data()["imageUrl"] ?? fallbackClubURL,
       desc: snapshot.data()["desc"] ?? 'description unavailable',
-      fb: snapshot.data()["fb"] ?? 'link unavailable',
+      fb: snapshot.data()["fb"] ?? fallbackURLweb,
     );
   }
 
@@ -54,13 +91,7 @@ class DatabaseService {
 
   List<Club> _clubListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
-      return Club(
-        id: doc.data()["id"],
-        name: doc.data()["name"] ?? 'event title',
-        desc: doc.data()["desc"] ?? 'Desc needed',
-        imageUrl: doc.data()["imageUrl"] ?? 'image missing',
-        fb: doc.data()["fb"] ?? "link unavailable",
-      );
+      return _clubFromSnapshot(doc);
     }).toList();
   }
 
@@ -70,21 +101,13 @@ class DatabaseService {
 
   List<EventCloud> _eventListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
-      return EventCloud(
-        id: doc.documentID.toString() ?? "No ID",
-        title: doc.data()["title"] ?? 'event title',
-        picture: doc.data()["picture"] ?? 'picture url',
-        clubId: doc.data()["clubId"] ?? 'clubid',
-        clubName: doc.data()["clubName"] ?? 'clubname',
-        about: doc.data()["about"] ?? 'about',
-        timings: DateTime.parse(doc.data()["timings"]),
-      );
+      return _eventFromSnapshot(doc);
     }).toList();
   }
 
   Stream<List<EventCloud>> get eventsFromCloud {
     return eventCollection
-        .orderBy("timestamp", descending: true)
+        .orderBy("startTime", descending: true)
         .snapshots()
         .map(_eventListFromSnapshot);
   }

@@ -33,7 +33,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
-  bool connection = false;
+  bool connection = true;
   var _connectionStatus = 'Unknown';
   Connectivity connectivity;
   StreamSubscription<ConnectivityResult> subscription;
@@ -121,8 +121,8 @@ class _MyAppState extends State<MyApp> {
       title: 'Flutter Demo',
       theme: ThemeData(
         textTheme: TextTheme(),
-        backgroundColor: Colors.white,
-        primaryColor: Colors.white,
+        backgroundColor: Colors.blue,
+        primaryColor: Colors.blue,
         primaryTextTheme: TextTheme(),
       ),
       routes: {
