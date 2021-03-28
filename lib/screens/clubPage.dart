@@ -47,7 +47,9 @@ class _ClubPageState extends State<ClubPage> {
                           return <Widget>[
                             SliverAppBar(
                               elevation: 0,
-                              iconTheme: IconThemeData(color: Colors.white,),
+                              iconTheme: IconThemeData(
+                                color: Colors.white,
+                              ),
                               expandedHeight: 200.0,
                               floating: false,
                               pinned: true,
@@ -60,26 +62,29 @@ class _ClubPageState extends State<ClubPage> {
                                   title: SABT(
                                       child: Text(
                                     club.name,
-                                    style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white,backgroundColor: Colors.blue,),
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                      backgroundColor: Colors.blue,
+                                    ),
                                   ))),
                             ),
                             SliverPersistentHeader(
                               delegate: _SliverAppBarDelegate(
-
                                 TabBar(
-
                                   indicator: BoxDecoration(
                                       borderRadius: BorderRadius.only(
-                             bottomLeft:Radius.circular(20),
-                                        bottomRight:Radius.circular(20),
-                            ),
-                                      gradient: LinearGradient(
-                                          colors: [Colors.blue, Colors.blueGrey])),
+                                        bottomLeft: Radius.circular(20),
+                                        bottomRight: Radius.circular(20),
+                                      ),
+                                      gradient: LinearGradient(colors: [
+                                        Colors.blue,
+                                        Colors.blueGrey
+                                      ])),
                                   labelPadding: EdgeInsets.symmetric(
                                       horizontal: 2.0, vertical: 1.0),
                                   labelColor: Colors.white,
                                   unselectedLabelColor: Colors.blue,
-
                                   tabs: [
                                     Tab(child: Icon(Icons.event)),
                                     Tab(
@@ -110,13 +115,13 @@ class _ClubPageState extends State<ClubPage> {
                                           'NULL ID DATABASE SERVICE EVENTCLOUD',
                                       title: snapshot.data()["title"] ??
                                           'event title',
-                                      startTime:
-                                          snapshot.data()["startTime"].toDate() ??
-                                              DateTime.now(),
+                                      startTime: snapshot.data()["startTime"].toDate() ??
+                                          DateTime.now(),
                                       imageUrl: snapshot.data()["imageUrl"] ??
                                           fallbackURL_image,
                                       googleFormLink:
-                                          snapshot.data()["googleFormLink"] ?? '',
+                                          snapshot.data()["googleFormLink"] ??
+                                              '',
                                       fbPostLink:
                                           snapshot.data()["fbPostLink"] ?? '',
                                       endTime: snapshot.data()["endTime"].toDate() ??
@@ -125,13 +130,12 @@ class _ClubPageState extends State<ClubPage> {
                                           snapshot.data()["clubId"] ?? 'clubid',
                                       clubName: snapshot.data()["clubName"] ??
                                           'clubname',
-                                      about: snapshot.data()["about"] ?? 'about',
+                                      about:
+                                          snapshot.data()["about"] ?? 'about',
                                       duration: snapshot
                                               .data()["endTime"]
                                               .toDate()
-                                              .difference(snapshot
-                                                  .data()["startTime"]
-                                                  .toDate())
+                                              .difference(snapshot.data()["startTime"].toDate())
                                               .inHours ??
                                           2);
 
@@ -141,6 +145,7 @@ class _ClubPageState extends State<ClubPage> {
                                 },
                                 query: FirebaseFirestore.instance
                                     .collection('events')
+                                    .orderBy("startTime", descending: true)
                                     .where("clubId", isEqualTo: id),
                                 listeners: [
                                   refreshChangeListener,
