@@ -53,7 +53,7 @@ class EventTile extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.fromLTRB(18, 15, 0, 0),
                           child: Text(
-                            event.title + " by " + event.clubName,
+                            event.title,
                             style: TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.bold),
                           ),
@@ -62,14 +62,15 @@ class EventTile extends StatelessWidget {
                           padding: const EdgeInsets.fromLTRB(18, 14, 0, 14),
                           child: Text(
                             DateFormat.jm().format(event.startTime) +
-                                " , " +
-                                DateFormat.MMMd().format(event.startTime),
+                                ", " +
+                                DateFormat.MMMd().format(event.startTime) +
+                                " | " +
+                                event.clubName,
 
                             // DateFormat.jm().format(event.startTime),
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.black54,
-
                             ),
                           ),
                         ),
@@ -86,7 +87,6 @@ class EventTile extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           OutlineButton(
-
                             // padding: EdgeInsets.symmetric(horizontal: 100.0),
                             child: new Text(
                               "   Details   ",
@@ -98,7 +98,8 @@ class EventTile extends StatelessWidget {
                             color: Colors.blueAccent,
                             highlightColor: Colors.blueAccent,
                             focusColor: Colors.blueAccent,
-                            borderSide: BorderSide(width: 2.0, color: Colors.blueAccent) ,
+                            borderSide: BorderSide(
+                                width: 2.0, color: Colors.blueAccent),
                             shape: new RoundedRectangleBorder(
                               borderRadius: new BorderRadius.circular(5.0),
                             ),
@@ -108,7 +109,6 @@ class EventTile extends StatelessWidget {
                             },
                           ),
                           OutlineButton(
-
                             // padding: EdgeInsets.symmetric(horizontal: 100.0),
                             child: new Text(
                               "Club Page",
@@ -120,7 +120,8 @@ class EventTile extends StatelessWidget {
                             color: Colors.redAccent,
                             highlightColor: Colors.redAccent,
                             focusColor: Colors.redAccent,
-                            borderSide: BorderSide(width: 2.0, color: Colors.redAccent) ,
+                            borderSide:
+                                BorderSide(width: 2.0, color: Colors.redAccent),
                             shape: new RoundedRectangleBorder(
                               borderRadius: new BorderRadius.circular(5.0),
                             ),
