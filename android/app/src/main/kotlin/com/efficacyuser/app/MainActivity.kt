@@ -1,4 +1,4 @@
-package com.example.dsc_club_management_app
+package com.efficacyuser.app
 
 import io.flutter.embedding.android.FlutterActivity
 
