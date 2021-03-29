@@ -53,7 +53,7 @@ class ClubEventTile extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.fromLTRB(18, 15, 0, 0),
                           child: Text(
-                            event.title + " by " + event.clubName,
+                            event.title,
                             style: TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.bold),
                           ),
@@ -62,7 +62,7 @@ class ClubEventTile extends StatelessWidget {
                           padding: const EdgeInsets.fromLTRB(18, 14, 0, 14),
                           child: Text(
                             DateFormat.jm().format(event.startTime) +
-                                " , " +
+                                " | " +
                                 DateFormat.MMMd().format(event.startTime),
 
                             // DateFormat.jm().format(event.startTime),
@@ -84,7 +84,6 @@ class ClubEventTile extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           OutlineButton(
-
                             // padding: EdgeInsets.symmetric(horizontal: 100.0),
                             child: new Text(
                               "Details",
@@ -96,7 +95,8 @@ class ClubEventTile extends StatelessWidget {
                             color: Colors.blueAccent,
                             highlightColor: Colors.blueAccent,
                             focusColor: Colors.blueAccent,
-                            borderSide: BorderSide(width: 2.0, color: Colors.blueAccent) ,
+                            borderSide: BorderSide(
+                                width: 2.0, color: Colors.blueAccent),
                             shape: new RoundedRectangleBorder(
                               borderRadius: new BorderRadius.circular(5.0),
                             ),
@@ -105,7 +105,6 @@ class ClubEventTile extends StatelessWidget {
                                   arguments: {"id": event.id});
                             },
                           ),
-
 
                           // Text(
                           //   "startTime",
