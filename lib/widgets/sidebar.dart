@@ -62,14 +62,16 @@ class SideBar extends StatelessWidget {
         //   ),
         //   onTap: () {},
         // ),
-        // ListTile(
-        //   leading: Icon(Icons.help_outline),
-        //   title: Text(
-        //     'Help and Feedback',
-        //     style: TextStyle(fontWeight: FontWeight.bold),
-        //   ),
-        //   onTap: () {},
-        // ),
+        ListTile(
+          leading: Icon(Icons.info),
+          title: Text(
+            'About Us',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          onTap: () {
+            Navigator.of(context).pushNamed("/about_us");
+          },
+        ),
 
         // Container(
         //     child: Column(

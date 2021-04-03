@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:Efficacy/screens/Team.dart';
 import 'package:Efficacy/screens/noInternet.dart';
 import 'package:Efficacy/screens/clubPage.dart';
 import 'package:Efficacy/screens/eventScreen.dart';
@@ -132,6 +133,7 @@ class _MyAppState extends State<MyApp> {
         "/profile": (context) => (connection) ? Profile() : NoInternet(),
         "/event": (context) => (connection) ? EventScreen() : NoInternet(),
         "/oneClub": (context) => (connection) ? ClubPage() : NoInternet(),
+        "/about_us": (context) => Team(),
       },
     );
   }

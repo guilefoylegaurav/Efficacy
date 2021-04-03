@@ -8,6 +8,7 @@ class AdminTiles extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Person> people = Provider.of<List<Person>>(context) ?? [];
+    print(people);
 
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,

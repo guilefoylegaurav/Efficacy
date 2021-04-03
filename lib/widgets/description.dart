@@ -20,6 +20,7 @@ class DescriptionSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("Club ID" + club.id);
     return Container(
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Padding(
