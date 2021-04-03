@@ -1,4 +1,4 @@
-package com.example.dsc_club_management_app
+package com.efficacyuser.app
 import io.flutter.app.FlutterApplication
 import io.flutter.plugin.common.PluginRegistry
 import io.flutter.plugin.common.PluginRegistry.PluginRegistrantCallback
