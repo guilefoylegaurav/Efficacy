@@ -27,10 +27,14 @@ class _FeedScreenState extends State<FeedScreen> {
   Widget build(BuildContext context) {
     // PaginateRefreshedChangeListener refreshChangeListener =
     //     PaginateRefreshedChangeListener();
-    Size size=MediaQuery.of(context).size;
+    Size size = MediaQuery.of(context).size;
 
     List<EventCloud> events = Provider.of<List<EventCloud>>(context);
     List<Club> clubs = Provider.of<List<Club>>(context) ?? [];
+    var clubIcons = new Map();
+    for (var data in clubs) {
+      clubIcons[data.id] = data.imageUrl;
+    }
     if (events == null || clubs == null) {
       return Scaffold(
         body: Loader(),
@@ -52,7 +56,6 @@ class _FeedScreenState extends State<FeedScreen> {
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
           ),
           backgroundColor: Colors.blue[400],
-
           elevation: 0,
         ),
         drawer: Drawer(
@@ -60,29 +63,28 @@ class _FeedScreenState extends State<FeedScreen> {
             clubList: clubs,
           ),
         ),
-        body:SingleChildScrollView(
+        body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: ClipRRect(
-            child:  Container(
-                  // color: Colors.blueAccent,
+            child: Container(
+              // color: Colors.blueAccent,
 
-                  child: ListView.builder(
-                    itemBuilder: (c, i) {
-                      return EventTile(
-                        event: events[i],
-                      );
-                    },
-                    itemCount: events.length,
-                  ),
+              child: ListView.builder(
+                itemBuilder: (c, i) {
+                  return EventTile(
+                      event: events[i],
+                      profileIcon: clubIcons[events[i].clubId]);
+                },
+                itemCount: events.length,
+              ),
 
+              height: size.height - 84,
+              // width: 100,
+              width: size.width,
 
-                  height:size.height-84,
-                  // width: 100,
-                  width:size.width,
-
-
-                  // color: Colors.blue,
-                ),),
+              // color: Colors.blue,
+            ),
+          ),
         ),
         // ListView.builder(
         //   itemBuilder: (c, i) {
