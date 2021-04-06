@@ -3,6 +3,7 @@ import 'package:Efficacy/models/club.dart';
 import 'package:Efficacy/models/people.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AdminTiles extends StatelessWidget {
   @override
@@ -17,12 +18,23 @@ class AdminTiles extends StatelessWidget {
           children: people.map((e) {
             return Container(
               width: 150,
-              child: Card(
-                child: Wrap(
-                  children: [
-                    Image.network(e.imageUrl),
-                    ListTile(title: Text(e.name)),
-                  ],
+              child: InkWell(
+                onTap: () async {
+                  if (e.fb.length == 0) {
+                    launch(fallbackURLweb);
+                  } else {
+                    launch(e.fb);
+                  }
+                },
+                child: Card(
+                  child: Wrap(
+                    children: [
+                      Image.network(e.imageUrl.length == 0
+                          ? fallbackURL_profile
+                          : e.imageUrl),
+                      ListTile(title: Text(e.name.split(" ").first)),
+                    ],
+                  ),
                 ),
               ),
             );
