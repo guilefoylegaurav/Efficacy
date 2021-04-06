@@ -11,6 +11,7 @@ import 'dart:math';
 
 import 'package:intl/intl.dart';
 
+// ignore: must_be_immutable
 class ClubEventTile extends StatelessWidget {
   EventCloud event;
   ClubEventTile({this.event});
@@ -51,15 +52,15 @@ class ClubEventTile extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(18, 15, 0, 0),
+                          padding: const EdgeInsets.fromLTRB(25, 15, 0, 0),
                           child: Text(
                             event.title,
                             style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
+                                fontSize: 23, fontWeight: FontWeight.bold),
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(18, 14, 0, 14),
+                          padding: const EdgeInsets.fromLTRB(25, 14, 0, 14),
                           child: Text(
                             DateFormat.jm().format(event.startTime) +
                                 " | " +
@@ -67,6 +68,7 @@ class ClubEventTile extends StatelessWidget {
 
                             // DateFormat.jm().format(event.startTime),
                             style: TextStyle(
+                              fontSize: 16,
                               fontWeight: FontWeight.bold,
                               color: Colors.black54,
                             ),
@@ -83,27 +85,16 @@ class ClubEventTile extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          OutlineButton(
-                            // padding: EdgeInsets.symmetric(horizontal: 100.0),
-                            child: new Text(
-                              "Details",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.blueAccent,
-                              ),
+                          // ignore: deprecated_member_use
+                          Container(
+                            child: InkWell(
+                              // padding: EdgeInsets.symmetric(horizontal: 100.0),
+                              child: new Icon(Icons.info_outline, color: Colors.blueAccent,size: 36,),
+                              onTap: () {
+                                Navigator.of(context).pushNamed("/event",
+                                    arguments: {"id": event.id});
+                              },
                             ),
-                            color: Colors.blueAccent,
-                            highlightColor: Colors.blueAccent,
-                            focusColor: Colors.blueAccent,
-                            borderSide: BorderSide(
-                                width: 2.0, color: Colors.blueAccent),
-                            shape: new RoundedRectangleBorder(
-                              borderRadius: new BorderRadius.circular(5.0),
-                            ),
-                            onPressed: () {
-                              Navigator.of(context).pushNamed("/event",
-                                  arguments: {"id": event.id});
-                            },
                           ),
 
                           // Text(

@@ -17,7 +17,8 @@ import 'package:provider/provider.dart';
 class EventTile extends StatelessWidget {
   EventCloud event;
   String profileIcon;
-  EventTile({this.event, this.profileIcon});
+  String clubId;
+  EventTile({this.event, this.clubId, this.profileIcon});
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -53,21 +54,27 @@ class EventTile extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(0, 12, 0, 8),
                     child: ListTile(
-                      leading: CircleAvatar(
-                        radius: 30.0,
-                        backgroundImage: NetworkImage(profileIcon),
-                        backgroundColor: Colors.transparent,
+                      leading: InkWell(
+                        onTap: (){
+                          Navigator.of(context).pushNamed("/oneClub", arguments: {"id": clubId});
+                        },
+                        child: CircleAvatar(
+                          radius: 30.0,
+                          backgroundImage: NetworkImage(profileIcon),
+                          backgroundColor: Colors.transparent,
+                        ),
                       ),
                       title: Text(
                         event.title,
                         style: TextStyle(fontSize: 25),
                       ),
                       subtitle: Text(DateFormat.jm().format(event.startTime) +
-                          ", " +
+                          " | " +
                           DateFormat.MMMd().format(event.startTime)),
                     ),
                   ),
                 ),
+
                 // Row(
                 //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 //   children: [
@@ -183,6 +190,7 @@ class EventTile extends StatelessWidget {
                 //   ],
                 // ),
               ],
+
             ),
           ),
         ),

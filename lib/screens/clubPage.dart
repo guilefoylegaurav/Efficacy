@@ -138,9 +138,8 @@ class _ClubPageState extends State<ClubPage> {
                                               .inHours ??
                                           2);
 
-                                  return EventTile(
+                                  return ClubEventTile(
                                     event: e,
-                                    profileIcon: club.imageUrl,
                                   );
                                 },
                                 query: FirebaseFirestore.instance
