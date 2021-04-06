@@ -32,7 +32,9 @@ class AdminTiles extends StatelessWidget {
                       Image.network(e.imageUrl.length == 0
                           ? fallbackURL_profile
                           : e.imageUrl),
-                      ListTile(title: Text(e.name.split(" ").first)),
+                      ListTile(
+                          title: Text(e.name,
+                              style: TextStyle(fontWeight: FontWeight.bold))),
                     ],
                   ),
                 ),
