@@ -7,6 +7,7 @@ import 'package:Efficacy/widgets/sidebar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class FeedScreen extends StatefulWidget {
   @override
@@ -23,32 +24,35 @@ class _FeedScreenState extends State<FeedScreen> {
     List<EventCloud> events = Provider.of<List<EventCloud>>(context);
     List<Club> clubs = Provider.of<List<Club>>(context) ?? [];
     var clubIcons = new Map();
-    var clubIds= new Map();
+    var clubIds = new Map();
     for (var data in clubs) {
       clubIcons[data.id] = data.imageUrl;
       clubIds[data.id] = data.id;
     }
     if (events == null || clubs == null) {
       return Scaffold(
+        backgroundColor: Colors.white,
         body: Loader(),
         appBar: AppBar(
           elevation: 0,
           leading: Icon(Icons.menu),
           title: Text(
             "Feed",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+            style: TextStyle(
+                fontWeight: FontWeight.bold, fontSize: 24, fontFamily: 'CG'),
           ),
         ),
       );
     } else {
       return Scaffold(
         appBar: AppBar(
-          centerTitle: true,
           title: Text(
             "Feed",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 30,
+                fontFamily: 'CGBold'),
           ),
-          backgroundColor: Colors.blue[400],
           elevation: 0,
         ),
         drawer: Drawer(

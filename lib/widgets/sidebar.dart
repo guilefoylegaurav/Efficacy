@@ -1,9 +1,11 @@
 import 'package:Efficacy/config.dart';
 import 'package:Efficacy/models/club.dart';
+import 'package:Efficacy/screens/eventScreen.dart';
 import 'package:Efficacy/utilities/utilities.dart';
 import 'package:Efficacy/widgets/line.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SideBar extends StatelessWidget {
   List<Club> clubList;
@@ -55,7 +57,7 @@ class SideBar extends StatelessWidget {
           }).toList(),
         ),
         // ListTile(
-        //   leading: Icon(Icons.settings),
+        //   leading: Icon),
         //   title: Text(
         //     'Settings',
         //     style: TextStyle(fontWeight: FontWeight.bold),
@@ -63,15 +65,53 @@ class SideBar extends StatelessWidget {
         //   onTap: () {},
         // ),
         ListTile(
-          leading: Icon(Icons.info),
+          leading: Icon(Icons.fastfood),
           title: Text(
-            'About Us',
+            'Mess Menu',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          onTap: () {},
+        ),
+        ListTile(
+          leading: Icon(Icons.map),
+          title: Text(
+            'Map',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          onTap: () async {
+            await canLaunch('https://goo.gl/maps/S7emUS8crVSN6kP88')
+                ? launchURL('https://goo.gl/maps/S7emUS8crVSN6kP88')
+                : print('Cannot show map');
+          },
+        ),
+        ListTile(
+          leading: Icon(Icons.link),
+          title: Text(
+            'Quick links',
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
           onTap: () {
-            Navigator.of(context).pushNamed("/about_us");
+            Navigator.of(context).pushNamed("/quick_links");
           },
         ),
+        ListTile(
+          leading: Icon(Icons.settings),
+          title: Text(
+            'Settings',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          onTap: () {},
+        ),
+        // ListTile(
+        //   leading: Icon(Icons.info),
+        //   title: Text(
+        //     'About Us',
+        //     style: TextStyle(fontWeight: FontWeight.bold),
+        //   ),
+        //   onTap: () {
+        //     Navigator.of(context).pushNamed("/about_us");
+        //   },
+        // ),
 
         // Container(
         //     child: Column(

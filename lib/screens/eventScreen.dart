@@ -91,17 +91,21 @@ class _EventDescriptionState extends State<EventDescription> {
       return StreamProvider.value(
         value: DatabaseService(id: event.clubId).fetchClub,
         child: Scaffold(
-          // floatingActionButton: FloatingActionButton.extended(
-          //     // icon: Icon(MdiIcons.pin),
-          //     label: Text("Interested"),
-          //     onPressed: _scheduleNotification),
+          floatingActionButton: FloatingActionButton.extended(
+              icon: Icon(MdiIcons.calendar),
+              label: Text("Add to Calendar"),
+              onPressed: () async {
+                await canLaunch(event.calendarLink)
+                    ? await launch(event.calendarLink)
+                    : await launch(fallbackCalendarLink);
+              }),
           body: CustomScrollView(
             slivers: [
               SliverAppBar(
                 elevation: 0,
                 pinned: true,
                 // title: Text(event.title),
-                expandedHeight: 200,
+                expandedHeight: 240,
                 flexibleSpace: FlexibleSpaceBar(
                     background: Image.network(
                   event.imageUrl,
@@ -116,54 +120,67 @@ class _EventDescriptionState extends State<EventDescription> {
                     padding: const EdgeInsets.fromLTRB(15, 25, 15, 25),
                     child: Text(
                       event.title,
-                      style:
-                          TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          fontSize: 40,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'CGBold'),
                     ),
                   ),
                   ListTile(
                     title: Text(
-                        DateFormat.jm().format(event.startTime).toString() +
-                            ", " +
-                            DateFormat.MMMd().format(event.startTime) +
-                            " to " +
-                            DateFormat.jm().format(event.endTime).toString() +
-                            ", " +
-                            DateFormat.MMMd().format(event.endTime)),
+                      DateFormat.jm().format(event.startTime).toString() +
+                          ", " +
+                          DateFormat.MMMd().format(event.startTime) +
+                          " - " +
+                          DateFormat.jm().format(event.endTime).toString() +
+                          ", " +
+                          DateFormat.MMMd().format(event.endTime),
+                      style: TextStyle(fontFamily: 'CGBold'),
+                    ),
                     leading: Icon(Icons.calendar_today),
                   ),
                   ListTile(
-                    title: Text(event.venue),
+                    title: Text(
+                      event.venue,
+                      style: TextStyle(fontFamily: 'CGBold'),
+                    ),
                     leading: Icon(
                       Icons.location_on,
                     ),
                   ),
                   Line(L: 50, R: 50, T: 40, B: 40),
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(15, 0, 15, 25),
-                    child: Text(
-                      "About",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  Center(
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(15, 0, 15, 25),
+                      child: Text(
+                        "About",
+                        style: TextStyle(
+                            fontSize: 32, fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ),
                   Padding(
                     padding: EdgeInsets.fromLTRB(15, 0, 15, 25),
                     child: Text(
                       event.about.replaceAll('/n', '\n'),
+                      style: TextStyle(fontSize: 16),
                     ),
                   ),
                   Line(L: 50, R: 50, T: 30, B: 50),
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(15, 0, 15, 25),
-                    child: Text(
-                      "Details",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  Center(
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(15, 0, 15, 25),
+                      child: Text(
+                        "Attachments",
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ),
                   Padding(
                     padding: EdgeInsets.fromLTRB(15, 0, 15, 25),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         FlatButton.icon(
                           icon: Icon(
@@ -201,7 +218,7 @@ class _EventDescriptionState extends State<EventDescription> {
                             }
                           },
                           label: Text(
-                            "Google form",
+                            "Registration form",
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold),

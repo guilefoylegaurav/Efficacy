@@ -8,3 +8,5 @@ String fallbackURL_profile =
 String fallbackClubURL =
     "https://www.pngkey.com/png/full/84-849089_keratoconus-academy-membership-plans-social-club-icon.png";
 String fallbackURLweb = "https://www.google.com/";
+String fallbackCalendarLink =
+    'http://www.google.com/calendar/event?action=TEMPLATE&dates=20210828T163000Z%2F20210828T173000Z&text=Party%20&location=Silchar&details=Silchar%20party';

@@ -43,29 +43,101 @@ class DescriptionSection extends StatelessWidget {
           club.desc.replaceAll('/n', '\n'),
         ),
       ),
-      Line(L: 50, R: 50, T: 25, B: 25),
-      Padding(
-        padding: const EdgeInsets.fromLTRB(15, 25, 15, 25),
-        child: Text(
-          "Social Links",
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-        ),
-      ),
+      // Line(L: 50, R: 50, T: 25, B: 25),
+      // Padding(
+      //   padding: const EdgeInsets.fromLTRB(15, 25, 15, 25),
+      //   child: Text(
+      //     "Social Links",
+      //     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+      //   ),
+      // ),
       Padding(
         padding: EdgeInsets.fromLTRB(10, 0, 15, 25),
-        child: Row(children: [
-          IconButton(
-              icon: Icon(
-                MdiIcons.facebook,
-                color: Colors.blue,
+        child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+          ActionChip(
+            shape: StadiumBorder(
+                side: BorderSide(
+              width: 1,
+              color: Colors.blue,
+            )),
+            backgroundColor: Colors.white,
+            avatar: CircleAvatar(
+              child: Icon(MdiIcons.facebook),
+              backgroundColor: Colors.white,
+            ),
+            label: Text(
+              club.name.toLowerCase().replaceAll(" ", "_"),
+              style: TextStyle(color: Colors.blue),
+            ),
+            onPressed: () async {
+              if (await canLaunch(club.fb)) {
+                await launch(club.fb);
+              } else {
+                await launch(fallbackURLweb);
+              }
+            },
+          ),
+          // IconButton(
+          //     icon: Icon(
+          //       MdiIcons.facebook,
+          //       color: Colors.blue,
+          //     ),
+          //     onPressed: () async {
+          //       if (club.fb.length == 0) {
+          //         await launch(fallbackURLweb);
+          //       } else {
+          //         await launch(club.fb);
+          //       }
+          //     }),
+          ActionChip(
+            backgroundColor: Colors.white,
+            shape: StadiumBorder(
+                side: BorderSide(
+              width: 1,
+              color: Colors.redAccent,
+            )),
+            avatar: CircleAvatar(
+              backgroundColor: Colors.white,
+              child: Icon(
+                MdiIcons.instagram,
+                color: Colors.pink,
               ),
-              onPressed: () async {
-                if (club.fb.length == 0) {
-                  await launch(fallbackURLweb);
-                } else {
-                  await launch(club.fb);
-                }
-              }),
+            ),
+            label: Text(
+              club.name.toLowerCase().replaceAll(" ", "_"),
+              style: TextStyle(color: Colors.pink),
+            ),
+            onPressed: () async {
+              if (await canLaunch(club.fb)) {
+                await launch(fallbackURLweb);
+              } else {
+                await launch(club.fb);
+              }
+            },
+          ),
+          ActionChip(
+            backgroundColor: Colors.white,
+            shape:
+                StadiumBorder(side: BorderSide(width: 1, color: Colors.orange)),
+            avatar: CircleAvatar(
+              backgroundColor: Colors.white,
+              child: Icon(
+                MdiIcons.gmail,
+                color: Colors.orange,
+              ),
+            ),
+            label: Text(
+              '@' + club.name.toLowerCase().replaceAll(" ", "_"),
+              style: TextStyle(color: Colors.orange),
+            ),
+            onPressed: () async {
+              if (await canLaunch(club.fb)) {
+                await launch(fallbackURLweb);
+              } else {
+                await launch(club.fb);
+              }
+            },
+          ),
 
           // IconButton(
           //     icon: Icon(
@@ -82,23 +154,23 @@ class DescriptionSection extends StatelessWidget {
         ]),
       ),
       Line(L: 50, R: 50, T: 25, B: 25),
-      Padding(
-        padding: const EdgeInsets.fromLTRB(15, 25, 15, 25),
-        child: Text(
-          "People",
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-        ),
-      ),
-      Padding(
-        padding: const EdgeInsets.fromLTRB(15, 0, 15, 25),
-        child: MultiProvider(
-          providers: [
-            StreamProvider.value(
-                value: DatabaseService(id: club.id).adminsPerClub),
-          ],
-          child: AdminTiles(),
-        ),
-      ),
+      // Padding(
+      //   padding: const EdgeInsets.fromLTRB(15, 25, 15, 25),
+      //   child: Text(
+      //     "People",
+      //     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+      //   ),
+      // ),
+      // Padding(
+      //   padding: const EdgeInsets.fromLTRB(15, 0, 15, 25),
+      //   child: MultiProvider(
+      //     providers: [
+      //       StreamProvider.value(
+      //           value: DatabaseService(id: club.id).adminsPerClub),
+      //     ],
+      //     child: AdminTiles(),
+      //   ),
+      // ),
 
       // Padding(
       //   padding: const EdgeInsets.all(8.0),

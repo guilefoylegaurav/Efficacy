@@ -14,9 +14,10 @@ class EventCloud {
       this.endTime,
       this.fbPostLink,
       this.googleFormLink,
-      this.imageUrl});
+      this.imageUrl,
+      this.calendarLink});
   String venue, title, clubName, clubId, about, id;
   DateTime startTime, endTime;
-  String fbPostLink, googleFormLink, imageUrl;
+  String fbPostLink, googleFormLink, imageUrl, calendarLink;
   int duration;
 }

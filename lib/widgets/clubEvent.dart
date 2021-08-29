@@ -24,7 +24,7 @@ class ClubEventTile extends StatelessWidget {
       },
       child: ClipRRect(
         child: Card(
-          elevation: 4,
+          elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
@@ -56,7 +56,9 @@ class ClubEventTile extends StatelessWidget {
                           child: Text(
                             event.title,
                             style: TextStyle(
-                                fontSize: 23, fontWeight: FontWeight.bold),
+                                fontSize: 23,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'CGBold'),
                           ),
                         ),
                         Padding(
@@ -89,7 +91,11 @@ class ClubEventTile extends StatelessWidget {
                           Container(
                             child: InkWell(
                               // padding: EdgeInsets.symmetric(horizontal: 100.0),
-                              child: new Icon(Icons.info_outline, color: Colors.blueAccent,size: 36,),
+                              child: new Icon(
+                                Icons.info_outline,
+                                color: Colors.blueAccent,
+                                size: 36,
+                              ),
                               onTap: () {
                                 Navigator.of(context).pushNamed("/event",
                                     arguments: {"id": event.id});

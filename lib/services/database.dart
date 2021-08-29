@@ -53,6 +53,7 @@ class DatabaseService {
         clubId: snapshot.data()["clubId"] ?? 'clubid',
         clubName: snapshot.data()["clubName"] ?? 'clubname',
         about: snapshot.data()["about"] ?? 'about',
+        calendarLink: snapshot.data()["calendarLink"] ?? fallbackCalendarLink,
         duration: snapshot
                 .data()["endTime"]
                 .toDate()

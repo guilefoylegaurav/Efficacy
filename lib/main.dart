@@ -4,6 +4,7 @@ import 'package:Efficacy/screens/noInternet.dart';
 import 'package:Efficacy/screens/clubPage.dart';
 import 'package:Efficacy/screens/eventScreen.dart';
 import 'package:Efficacy/screens/feedScreen.dart';
+import 'package:Efficacy/screens/quicklinks.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:overlay_support/overlay_support.dart';
@@ -121,11 +122,9 @@ class _MyAppState extends State<MyApp> {
       navigatorKey: navigatorKey,
       title: 'Flutter Demo',
       theme: ThemeData(
-        textTheme: TextTheme(),
-        backgroundColor: Colors.blue,
-        primaryColor: Colors.blue,
-        primaryTextTheme: TextTheme(),
-      ),
+          backgroundColor: Colors.white,
+          primaryColor: Colors.white,
+          fontFamily: 'CenturyGothic'),
       routes: {
         "/": (context) => (connection) ? Wrapper() : NoInternet(),
         "/register": (context) => (connection) ? Register() : NoInternet(),
@@ -133,7 +132,9 @@ class _MyAppState extends State<MyApp> {
         "/profile": (context) => (connection) ? Profile() : NoInternet(),
         "/event": (context) => (connection) ? EventScreen() : NoInternet(),
         "/oneClub": (context) => (connection) ? ClubPage() : NoInternet(),
-        "/about_us": (context) => Team(),
+        "/quick_links": (context) => (connection) ? QuickLinks() : NoInternet(),
+
+        // "/about_us": (context) => Team(),
       },
     );
   }

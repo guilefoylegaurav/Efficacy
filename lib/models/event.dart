@@ -1,5 +1,5 @@
 class Event {
-  String id, name, club, date, time, description, url;
+  String id, calendarLink, name, club, date, time, description, url;
   Event(
       {this.id,
       this.name,
@@ -7,5 +7,6 @@ class Event {
       this.date,
       this.time,
       this.description,
-      this.url});
+      this.url,
+      this.calendarLink});
 }

@@ -28,7 +28,7 @@ class EventTile extends StatelessWidget {
       },
       child: ClipRRect(
         child: Card(
-          elevation: 4,
+          elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
@@ -55,8 +55,9 @@ class EventTile extends StatelessWidget {
                     padding: const EdgeInsets.fromLTRB(0, 12, 0, 8),
                     child: ListTile(
                       leading: InkWell(
-                        onTap: (){
-                          Navigator.of(context).pushNamed("/oneClub", arguments: {"id": clubId});
+                        onTap: () {
+                          Navigator.of(context)
+                              .pushNamed("/oneClub", arguments: {"id": clubId});
                         },
                         child: CircleAvatar(
                           radius: 30.0,
@@ -66,11 +67,17 @@ class EventTile extends StatelessWidget {
                       ),
                       title: Text(
                         event.title,
-                        style: TextStyle(fontSize: 25),
+                        style: TextStyle(fontSize: 25, fontFamily: 'CGBold'),
                       ),
-                      subtitle: Text(DateFormat.jm().format(event.startTime) +
-                          " | " +
-                          DateFormat.MMMd().format(event.startTime)),
+                      subtitle: Text(
+                        DateFormat.jm().format(event.startTime) +
+                            " | " +
+                            DateFormat.MMMd().format(event.startTime),
+                        style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.orange[900],
+                            fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ),
                 ),
@@ -190,7 +197,6 @@ class EventTile extends StatelessWidget {
                 //   ],
                 // ),
               ],
-
             ),
           ),
         ),

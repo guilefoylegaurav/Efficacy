@@ -38,7 +38,7 @@ class _ClubPageState extends State<ClubPage> {
 
             return Container(
               child: Material(
-                color: Colors.blue,
+                color: Colors.white,
                 child: Scaffold(
                   body: DefaultTabController(
                     length: 2,
@@ -65,8 +65,8 @@ class _ClubPageState extends State<ClubPage> {
                                     club.name,
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                      backgroundColor: Colors.blue,
+                                      color: Colors.black,
+                                      // backgroundColor: Colors.blue,
                                     ),
                                   ))),
                             ),
