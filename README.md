@@ -6,5 +6,18 @@ Some interesting features of this app include:
 - Point of contact between student and college clubs/frats
 - Quick links
 
+### Screenshots
+<p align = "center">
+<img src = "/images/feed.jpeg" height="600px" width = "300px">
+  <img src = "/images/sidebar.jpeg" height="600px" width = "300px">
+ </p>
+  <p float = "right">
 
-
+  </p>
+  
+  
+  
+<p align= "center">
+  <img src = "/images/event.jpeg" height="600px" width = "300px">
+<img src = "/images/club.jpeg" height="520px" width = "300px">
+  </p>
