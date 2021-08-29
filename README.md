@@ -1,4 +1,6 @@
 ### Efficacy : The proposed Android app for all clubs, events and happenings at NIT Silchar
+Get the [release APK](apks/app-release.apk)
+
 Some interesting features of this app include:
 - A comprehensive feed of all the events happening in and around the institute
 - Push notifs whenever a new event is added
